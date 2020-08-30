@@ -12,9 +12,10 @@ using System.Windows.Forms;
 
 namespace QuizApp.UI
 {
-    public partial class AuthenticationForm : Form
+    public partial class NewAccountForm : Form
     {
-        public AuthenticationForm()
+        public Form authentication { get; set; }
+        public NewAccountForm()
         {
             InitializeComponent();
         }
@@ -22,24 +23,10 @@ namespace QuizApp.UI
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.authentication.Show();
         }
 
-        private void lbl_creatNewAccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                this.Hide();
-                NewAccountForm newAccount = new NewAccountForm();
-                newAccount.authentication = this;
-                newAccount.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-        }
-
-        private void btn_login_Click(object sender, EventArgs e)
+        private void btn_create_Click(object sender, EventArgs e)
         {
             try
             {
@@ -49,18 +36,17 @@ namespace QuizApp.UI
                     UserPassword = txt_password.Text
                 };
 
-                if (txt_name.Text != "" && txt_password.Text != "" && LogicHelper.Login(account))
+                if (txt_name.Text != "" && txt_password.Text != "" && LogicHelper.CreateNewAccount(account))
                 {
-                    this.Hide();
-                    MainForm mainForm = new MainForm();
-                    mainForm.Closed += (s, args) => this.Close();
-                    mainForm.Show();
+                    this.Close();
+                    MessageBox.Show("Created successfully.", "Success!!!");
+                    this.authentication.Show();
                 }
                 else
                 {
+                    MessageBox.Show("An account with the current name already exists, or some fields are empty.", "Error");
                     txt_name.Text = "";
                     txt_password.Text = "";
-                    MessageBox.Show("Invalid name or password.", "Error");
                 }
             }
             catch (Exception ex)

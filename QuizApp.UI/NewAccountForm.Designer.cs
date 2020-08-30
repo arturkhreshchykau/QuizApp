@@ -1,6 +1,6 @@
 ﻿namespace QuizApp.UI
 {
-    partial class NewAccount
+    partial class NewAccountForm
     {
         /// <summary>
         /// Required designer variable.
