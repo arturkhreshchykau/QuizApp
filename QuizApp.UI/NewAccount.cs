@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace QuizApp.UI
 {
-    public partial class Form1 : Form
+    public partial class NewAccount : Form
     {
-        public Form1()
+        public Form authentication { get; set; }
+        public NewAccount()
         {
             InitializeComponent();
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.authentication.Show();
         }
     }
 }
