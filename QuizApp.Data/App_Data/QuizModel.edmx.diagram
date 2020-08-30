@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="75f5b9da97d64981a916f7258745e14e" Name="Diagram1">
+      <Diagram DiagramId="6f5a03dc9c5945c0937ad0218b81d95b" Name="Diagram1">
         <EntityTypeShape EntityType="QuizDBModel.Answer" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QuizDBModel.Category" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QuizDBModel.Question" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuizDBModel.Statistic" Width="1.5" PointX="1.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuizDBModel.sysdiagram" Width="1.5" PointX="7.625" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuizDBModel.Statistic" Width="1.5" PointX="1.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuizDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QuizDBModel.Test" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuizDBModel.User" Width="1.5" PointX="5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuizDBModel.User" Width="1.5" PointX="4.375" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="QuizDBModel.FK_Answers_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="QuizDBModel.FK_Categories_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="QuizDBModel.FK_Tests_Categories" ManuallyRouted="false" />

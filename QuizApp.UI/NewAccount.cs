@@ -23,5 +23,10 @@ namespace QuizApp.UI
             this.Close();
             this.authentication.Show();
         }
+
+        private void btn_create_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

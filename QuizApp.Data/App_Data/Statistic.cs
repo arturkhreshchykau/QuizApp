@@ -7,17 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuizApp.Data
+namespace QuizApp.Data.App_Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Statistic
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int StatisticID { get; set; }
+        public int UserID { get; set; }
+        public int TestID { get; set; }
+        public int CorrectAnswer { get; set; }
+    
+        public virtual Test Test { get; set; }
+        public virtual User User { get; set; }
     }
 }

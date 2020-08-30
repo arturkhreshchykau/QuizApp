@@ -7,26 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuizApp.Data
+namespace QuizApp.Data.App_Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Question
+    public partial class Test
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Question()
+        public Test()
         {
-            this.Answers = new HashSet<Answer>();
+            this.Questions = new HashSet<Question>();
+            this.Statistics = new HashSet<Statistic>();
         }
     
-        public int QuestionID { get; set; }
         public int TestID { get; set; }
-        public string QuestionName { get; set; }
-        public bool isOpen { get; set; }
+        public string TestName { get; set; }
+        public int CategoryID { get; set; }
+        public Nullable<int> Timer { get; set; }
+        public bool isLiveCheck { get; set; }
+        public bool Deleted { get; set; }
     
+        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answers { get; set; }
-        public virtual Test Test { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Statistic> Statistics { get; set; }
     }
 }

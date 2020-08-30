@@ -45,6 +45,7 @@
             this.btn_create.TabIndex = 13;
             this.btn_create.Text = "Create";
             this.btn_create.UseVisualStyleBackColor = true;
+            this.btn_create.Click += new System.EventHandler(this.btn_create_Click);
             // 
             // btn_cancel
             // 

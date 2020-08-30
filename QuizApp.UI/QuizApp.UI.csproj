@@ -88,5 +88,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuizApp.Data\QuizApp.Data.csproj">
+      <Project>{4279033b-6f17-4842-b497-aa0b4772e262}</Project>
+      <Name>QuizApp.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuizApp.Logic\QuizApp.Logic.csproj">
+      <Project>{3228cbb2-b49d-4e35-839e-dee7a147919a}</Project>
+      <Name>QuizApp.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
