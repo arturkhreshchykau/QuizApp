@@ -1,6 +1,6 @@
-﻿namespace QuizApp.UI
+﻿namespace QuizApp.UI.Forms
 {
-    partial class MainForm
+    partial class NewTestFrom
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // MainForm
+            // NewTestFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 555);
+            this.ClientSize = new System.Drawing.Size(605, 523);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "MainForm";
+            this.Name = "NewTestFrom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Welcom!";
+            this.Text = "New Test";
             this.ResumeLayout(false);
 
         }

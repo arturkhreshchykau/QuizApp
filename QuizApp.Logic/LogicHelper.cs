@@ -11,6 +11,7 @@ namespace QuizApp.Logic
 {
     public static class LogicHelper
     {
+        public static string UserName { get; set; }
         public static bool CreateNewAccount(Account account)
         {
             bool created = true;
@@ -51,7 +52,13 @@ namespace QuizApp.Logic
                             && x.UserPassword == account.UserPassword)
                             .SingleOrDefault();
                     if (log == null)
+                    {
                         login = false;
+                    }
+                    else
+                    {
+                        LogicHelper.UserName = log.UserName;
+                    }
                 }
                 return login;
             }

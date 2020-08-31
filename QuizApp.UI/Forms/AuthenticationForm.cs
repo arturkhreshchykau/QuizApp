@@ -52,9 +52,9 @@ namespace QuizApp.UI
                 if (txt_name.Text != "" && txt_password.Text != "" && LogicHelper.Login(account))
                 {
                     this.Hide();
-                    MainForm mainForm = new MainForm();
-                    mainForm.Closed += (s, args) => this.Close();
-                    mainForm.Show();
+                    StartForm startForm = new StartForm();
+                    startForm.Closed += (s, args) => this.Close();
+                    startForm.Show();
                 }
                 else
                 {

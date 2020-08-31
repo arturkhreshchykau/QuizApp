@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuizApp.UI
+namespace QuizApp.UI.Forms
 {
-    public partial class MainForm : Form
+    public partial class NewTestFrom : Form
     {
-        public MainForm()
+        public NewTestFrom()
         {
             InitializeComponent();
         }
