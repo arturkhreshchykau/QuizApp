@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\NewQuestionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewQuestionForm.Designer.cs">
+      <DependentUpon>NewQuestionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NewTestFrom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\NewQuestionForm.resx">
+      <DependentUpon>NewQuestionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewTestFrom.resx">
       <DependentUpon>NewTestFrom.cs</DependentUpon>
     </EmbeddedResource>

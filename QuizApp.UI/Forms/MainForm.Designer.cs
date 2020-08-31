@@ -111,7 +111,7 @@
             // 
             // ch_categoryName
             // 
-            this.ch_categoryName.Text = "Category/Subcategory/Topic";
+            this.ch_categoryName.Text = "Category/SubCategory/Topic";
             this.ch_categoryName.Width = 160;
             // 
             // ch_timer
