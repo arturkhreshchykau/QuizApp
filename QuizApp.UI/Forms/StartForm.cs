@@ -14,10 +14,10 @@ namespace QuizApp.UI
 {
     public partial class StartForm : Form
     {
-        public StartForm()
+        public StartForm(string UserName)
         {
             InitializeComponent();
-            lbl_welcome.Text += " " + LogicHelper.UserName + " ! ! !";
+            lbl_welcome.Text += " " + UserName + " ! ! !";
         }
 
         private void button1_Click(object sender, EventArgs e)

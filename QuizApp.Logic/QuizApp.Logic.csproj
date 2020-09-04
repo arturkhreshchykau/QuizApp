@@ -48,8 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogicHelper.cs" />
-    <Compile Include="Models\Account.cs" />
+    <Compile Include="Interfaces\ICategoryHelper.cs" />
+    <Compile Include="Interfaces\IUserHelper.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\TestModel.cs" />
+    <Compile Include="Repository\CategoryHelper.cs" />
+    <Compile Include="Repository\UserHelper.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,5 +67,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

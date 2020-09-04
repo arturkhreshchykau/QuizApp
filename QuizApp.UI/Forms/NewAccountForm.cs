@@ -30,14 +30,17 @@ namespace QuizApp.UI
         {
             try
             {
-                Account account = new Account()
+                UserModel userModel = new UserModel()
                 {
-                    UserName = txt_name.Text,
-                    UserPassword = txt_password.Text
+                    Name = txt_name.Text,
+                    Password = txt_password.Text
                 };
 
-                if (txt_name.Text != "" && txt_password.Text != "" && LogicHelper.CreateNewAccount(account))
+                UserHelper userHelper = new UserHelper();
+
+                if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && !userHelper.Exist(userModel))
                 {
+                    userHelper.Add(userModel);
                     this.Close();
                     MessageBox.Show("Created successfully.", "Success!!!");
                     this.authentication.Show();

@@ -48,6 +48,15 @@
             this.btn_addQuestion = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.lbl_numberOfQuestion = new System.Windows.Forms.Label();
+            this.lbl_addCategory = new System.Windows.Forms.LinkLabel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lbl_deleteCategory = new System.Windows.Forms.LinkLabel();
+            this.lbl_deleteSubCategory = new System.Windows.Forms.LinkLabel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbl_addSubCategory = new System.Windows.Forms.LinkLabel();
+            this.lbl_deleteTopic = new System.Windows.Forms.LinkLabel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lbl_addTopic = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -231,11 +240,108 @@
             this.lbl_numberOfQuestion.TabIndex = 21;
             this.lbl_numberOfQuestion.Text = "0";
             // 
+            // lbl_addCategory
+            // 
+            this.lbl_addCategory.AutoSize = true;
+            this.lbl_addCategory.Location = new System.Drawing.Point(273, 119);
+            this.lbl_addCategory.Name = "lbl_addCategory";
+            this.lbl_addCategory.Size = new System.Drawing.Size(25, 13);
+            this.lbl_addCategory.TabIndex = 22;
+            this.lbl_addCategory.TabStop = true;
+            this.lbl_addCategory.Text = "add";
+            this.lbl_addCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_addCategory_LinkClicked);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(295, 119);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(12, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "/";
+            // 
+            // lbl_deleteCategory
+            // 
+            this.lbl_deleteCategory.AutoSize = true;
+            this.lbl_deleteCategory.Location = new System.Drawing.Point(304, 119);
+            this.lbl_deleteCategory.Name = "lbl_deleteCategory";
+            this.lbl_deleteCategory.Size = new System.Drawing.Size(36, 13);
+            this.lbl_deleteCategory.TabIndex = 26;
+            this.lbl_deleteCategory.TabStop = true;
+            this.lbl_deleteCategory.Text = "delete";
+            // 
+            // lbl_deleteSubCategory
+            // 
+            this.lbl_deleteSubCategory.AutoSize = true;
+            this.lbl_deleteSubCategory.Location = new System.Drawing.Point(304, 160);
+            this.lbl_deleteSubCategory.Name = "lbl_deleteSubCategory";
+            this.lbl_deleteSubCategory.Size = new System.Drawing.Size(36, 13);
+            this.lbl_deleteSubCategory.TabIndex = 29;
+            this.lbl_deleteSubCategory.TabStop = true;
+            this.lbl_deleteSubCategory.Text = "delete";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(295, 160);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(12, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "/";
+            // 
+            // lbl_addSubCategory
+            // 
+            this.lbl_addSubCategory.AutoSize = true;
+            this.lbl_addSubCategory.Location = new System.Drawing.Point(273, 160);
+            this.lbl_addSubCategory.Name = "lbl_addSubCategory";
+            this.lbl_addSubCategory.Size = new System.Drawing.Size(25, 13);
+            this.lbl_addSubCategory.TabIndex = 27;
+            this.lbl_addSubCategory.TabStop = true;
+            this.lbl_addSubCategory.Text = "add";
+            // 
+            // lbl_deleteTopic
+            // 
+            this.lbl_deleteTopic.AutoSize = true;
+            this.lbl_deleteTopic.Location = new System.Drawing.Point(304, 201);
+            this.lbl_deleteTopic.Name = "lbl_deleteTopic";
+            this.lbl_deleteTopic.Size = new System.Drawing.Size(36, 13);
+            this.lbl_deleteTopic.TabIndex = 32;
+            this.lbl_deleteTopic.TabStop = true;
+            this.lbl_deleteTopic.Text = "delete";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(295, 201);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(12, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "/";
+            // 
+            // lbl_addTopic
+            // 
+            this.lbl_addTopic.AutoSize = true;
+            this.lbl_addTopic.Location = new System.Drawing.Point(273, 201);
+            this.lbl_addTopic.Name = "lbl_addTopic";
+            this.lbl_addTopic.Size = new System.Drawing.Size(25, 13);
+            this.lbl_addTopic.TabIndex = 30;
+            this.lbl_addTopic.TabStop = true;
+            this.lbl_addTopic.Text = "add";
+            // 
             // NewTestFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(397, 447);
+            this.Controls.Add(this.lbl_deleteTopic);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.lbl_addTopic);
+            this.Controls.Add(this.lbl_deleteSubCategory);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lbl_addSubCategory);
+            this.Controls.Add(this.lbl_deleteCategory);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lbl_addCategory);
             this.Controls.Add(this.lbl_numberOfQuestion);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btn_addQuestion);
@@ -287,5 +393,14 @@
         private System.Windows.Forms.Button btn_addQuestion;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lbl_numberOfQuestion;
+        private System.Windows.Forms.LinkLabel lbl_addCategory;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.LinkLabel lbl_deleteCategory;
+        private System.Windows.Forms.LinkLabel lbl_deleteSubCategory;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.LinkLabel lbl_addSubCategory;
+        private System.Windows.Forms.LinkLabel lbl_deleteTopic;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.LinkLabel lbl_addTopic;
     }
 }

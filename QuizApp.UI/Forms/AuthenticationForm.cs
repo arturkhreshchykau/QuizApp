@@ -43,25 +43,27 @@ namespace QuizApp.UI
         {
             try
             {
-                Account account = new Account()
+                UserModel userModel = new UserModel()
                 {
-                    UserName = txt_name.Text,
-                    UserPassword = txt_password.Text
+                    Name = txt_name.Text,
+                    Password = txt_password.Text
                 };
 
-                if (txt_name.Text != "" && txt_password.Text != "" && LogicHelper.Login(account))
-                {
+                UserHelper userHelper = new UserHelper();
+
+                //if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && userHelper.GetUser(userModel))
+                //{
                     this.Hide();
-                    StartForm startForm = new StartForm();
+                    StartForm startForm = new StartForm(txt_name.Text);
                     startForm.Closed += (s, args) => this.Close();
                     startForm.Show();
-                }
-                else
-                {
-                    txt_name.Text = "";
-                    txt_password.Text = "";
-                    MessageBox.Show("Invalid name or password.", "Error");
-                }
+                //}
+                //else
+                //{
+                //    txt_name.Text = "";
+                //    txt_password.Text = "";
+                //    MessageBox.Show("Invalid name or password.", "Error");
+                //}
             }
             catch (Exception ex)
             {
