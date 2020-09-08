@@ -61,11 +61,12 @@ namespace QuizApp.UI.Forms
                 CategoryModel categoryModel = new CategoryModel();
                 categoryModel.CategoryName = cbo_category.Text;
                 
-                CategoryHelper categoryHelper = new CategoryHelper();
+                CategoryRepository categoryHelper = new CategoryRepository();
 
                 if (!string.IsNullOrEmpty(categoryModel.CategoryName) && !categoryHelper.Exist(categoryModel))
                 {
                     categoryHelper.AddCategory(categoryModel);
+                    MessageBox.Show("Added successfully!");
                     categoryList.Clear();
                     DisplayCategory();
                 }
@@ -84,13 +85,43 @@ namespace QuizApp.UI.Forms
         {
             try
             {
-                CategoryHelper categoryHelper = new CategoryHelper();
+                CategoryRepository categoryHelper = new CategoryRepository();
                 CategoryModel categoryModel = new CategoryModel();
                 categoryList = categoryHelper.GetAllCategories(categoryModel);
                 cbo_category.ValueMember = "CategoryId";
                 cbo_category.DisplayMember = "CategoryName";
                 cbo_category.DataSource = categoryList;
                 cbo_category.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
+
+        private void lbl_deleteCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(cbo_category.Text))
+                {
+                    int id = Convert.ToInt32(cbo_category.SelectedValue);
+                    CategoryRepository categoryHelper = new CategoryRepository();
+                    categoryHelper.DeleteCategory(id);
+                    foreach (var item in categoryList)
+                    {
+                        if (item.CategoryId == id)
+                        {
+                            MessageBox.Show("Deleted successfully");
+                            DisplayCategory();
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select the Category for deleting!", "Error");
+                }
             }
             catch (Exception ex)
             {

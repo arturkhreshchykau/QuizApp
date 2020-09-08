@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Logic.Interfaces
 {
-    public interface IUserHelper
+    public interface IUserRepository
     {
         bool Exist(UserModel user);
         bool GetUser(UserModel user);

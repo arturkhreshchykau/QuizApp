@@ -36,7 +36,7 @@ namespace QuizApp.UI
                     Password = txt_password.Text
                 };
 
-                UserHelper userHelper = new UserHelper();
+                UserRepository userHelper = new UserRepository();
 
                 if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && !userHelper.Exist(userModel))
                 {
@@ -48,8 +48,8 @@ namespace QuizApp.UI
                 else
                 {
                     MessageBox.Show("An account with the current name already exists, or some fields are empty.", "Error");
-                    txt_name.Text = "";
-                    txt_password.Text = "";
+                    txt_name.Text = string.Empty;
+                    txt_password.Text = string.Empty;
                 }
             }
             catch (Exception ex)

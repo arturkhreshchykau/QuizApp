@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Logic
 {
-    public class UserHelper : IUserHelper
+    public class UserRepository : IUserRepository
     {
         public string UserName { get; set; }
         private readonly QuizDBEntities _quizDB;
 
-        public UserHelper()
+        public UserRepository()
         {
             _quizDB = new QuizDBEntities();
         }

@@ -269,6 +269,7 @@
             this.lbl_deleteCategory.TabIndex = 26;
             this.lbl_deleteCategory.TabStop = true;
             this.lbl_deleteCategory.Text = "delete";
+            this.lbl_deleteCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_deleteCategory_LinkClicked);
             // 
             // lbl_deleteSubCategory
             // 

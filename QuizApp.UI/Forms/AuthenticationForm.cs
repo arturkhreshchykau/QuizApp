@@ -49,7 +49,7 @@ namespace QuizApp.UI
                     Password = txt_password.Text
                 };
 
-                UserHelper userHelper = new UserHelper();
+                UserRepository userRepository = new UserRepository();
 
                 //if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && userHelper.GetUser(userModel))
                 //{
@@ -60,9 +60,9 @@ namespace QuizApp.UI
                 //}
                 //else
                 //{
-                //    txt_name.Text = "";
-                //    txt_password.Text = "";
-                //    MessageBox.Show("Invalid name or password.", "Error");
+                //txt_name.Text = string.Empty;
+                //txt_password.Text = string.Empty;
+                //MessageBox.Show("Invalid name or password.", "Error");
                 //}
             }
             catch (Exception ex)
