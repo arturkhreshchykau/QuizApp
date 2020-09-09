@@ -50,13 +50,15 @@
   <ItemGroup>
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\TestModel.cs" />
-    <Compile Include="Repositories\Implementations\CategoryRepository.cs" />
-    <Compile Include="Repositories\Interfaces\ICategoryRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
-    <Compile Include="Repositories\Implementations\UserRepository.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Implementations\CategoryService.cs" />
+    <Compile Include="Services\Implementations\TestService.cs" />
+    <Compile Include="Services\Implementations\UserService.cs" />
+    <Compile Include="Services\Interfaces\ICategoryService.cs" />
+    <Compile Include="Services\Interfaces\IService.cs" />
+    <Compile Include="Services\Interfaces\ITestService.cs" />
+    <Compile Include="Services\Interfaces\IUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuizApp.Data\QuizApp.Data.csproj">
