@@ -1,4 +1,5 @@
-﻿using QuizApp.Data.Repositories.Interfaces;
+﻿using QuizApp.Data.App_Data;
+using QuizApp.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,13 +11,13 @@ namespace QuizApp.Data.Repositories.Implementations
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        DbContext _context;
+        QuizDBEntities _context;
         DbSet<TEntity> _dbSet;
 
-        public GenericRepository(DbContext context)
+        public GenericRepository()
         {
-            _context = context;
-            _dbSet = context.Set<TEntity>();
+            _context = new QuizDBEntities();
+            _dbSet = _context.Set<TEntity>();
         }
 
         public void Add(TEntity item)
@@ -25,7 +26,7 @@ namespace QuizApp.Data.Repositories.Implementations
             _context.SaveChanges();
         }
 
-        public IQueryable<TEntity> DetAll()
+        public IQueryable<TEntity> GetAll()
         {
             return _dbSet.AsNoTracking();
         }
@@ -35,7 +36,7 @@ namespace QuizApp.Data.Repositories.Implementations
             return _dbSet.Find(id);
         }
 
-        public void Remove(TEntity item)
+        public void Delete(TEntity item)
         {
             _dbSet.Remove(item);
             _context.SaveChanges();

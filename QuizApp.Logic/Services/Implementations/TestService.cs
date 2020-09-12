@@ -20,12 +20,12 @@ namespace QuizApp.Logic.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public TestModel Get(TestModel item)
+        public TestModel Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<TestModel> GetAll()
+        public IEnumerable<TestModel> GetAll()
         {
             throw new NotImplementedException();
         }

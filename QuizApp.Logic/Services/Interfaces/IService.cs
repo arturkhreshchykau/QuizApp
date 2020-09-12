@@ -10,7 +10,7 @@ namespace QuizApp.Logic.Services.Interfaces
     {
         bool Add(T item);
         bool Delete(T item);
-        T Get(T item);
-        IQueryable<T> GetAll();
+        T Get(int id);
+        IEnumerable<T> GetAll();
     }
 }

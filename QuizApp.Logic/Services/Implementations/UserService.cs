@@ -1,4 +1,7 @@
-﻿using QuizApp.Logic.Models;
+﻿using QuizApp.Data.App_Data;
+using QuizApp.Data.Repositories.Implementations;
+using QuizApp.Data.Repositories.Interfaces;
+using QuizApp.Logic.Models;
 using QuizApp.Logic.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,24 +13,96 @@ namespace QuizApp.Logic.Services.Implementations
 {
     public class UserService : IUserService
     {
+        private IGenericRepository<User> _userRepository;
+
+        public UserService()
+        {
+            _userRepository = new GenericRepository<User>();
+        }
+
         public bool Add(UserModel item)
         {
-            throw new NotImplementedException();
+            bool added;
+            if (item != null)
+            {
+                _userRepository.Add(Mapping(item));
+                added = true;
+            }
+            else
+            {
+                added = false;
+            }
+            return added; 
         }
 
         public bool Delete(UserModel item)
         {
-            throw new NotImplementedException();
+            bool deleted;
+            if (item != null)
+            {
+                _userRepository.Delete(Mapping(item));
+                deleted = true;
+            }
+            else
+            {
+                deleted = false;
+            }
+            return deleted;
         }
 
-        public UserModel Get(UserModel item)
+        public UserModel Get(int id)
         {
-            throw new NotImplementedException();
+            if (id < 1)
+            {
+                return null;
+            }
+            else
+            {
+                var user = _userRepository.GetById(id);
+                return new UserModel()
+                {
+                    ID = user.UserID,
+                    Name = user.UserName,
+                    Password = user.UserPassword
+                };
+            }  
         }
 
-        public IQueryable<UserModel> GetAll()
+        public IEnumerable<UserModel> GetAll()
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAll().Select(user => new UserModel { ID = user.UserID, Name = user.UserName, Password = user.UserPassword }).AsEnumerable();
+        }
+
+        public bool LogIn(UserModel item)
+        {
+            var allUsers = GetAll().Where(x => x.Name == item.Name
+                           && x.Password == item.Password)
+                           .SingleOrDefault();
+
+            bool login = false;
+            if (allUsers != null)
+                login = true;
+
+            return login;
+        }
+
+        public bool Exist(UserModel item)
+        {
+            var user = GetAll().Where(x => x.Name == item.Name).SingleOrDefault();
+            bool exist = false;
+            if (user != null)
+                exist = true;
+
+            return exist;
+        }
+
+        private User Mapping(UserModel item)
+        {
+            return new User()
+            {
+                UserName = item.Name,
+                UserPassword = item.Password
+            };
         }
     }
 }

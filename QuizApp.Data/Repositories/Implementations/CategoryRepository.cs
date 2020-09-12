@@ -1,6 +1,4 @@
 ﻿using QuizApp.Data.App_Data;
-using QuizApp.Logic.Interfaces;
-using QuizApp.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Logic.Repository
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository
     {
         //private readonly QuizDBEntities _quizDB;
 
@@ -65,24 +63,24 @@ namespace QuizApp.Logic.Repository
 
         //    return categoryList;
         //}
-        public bool Add(CategoryModel item)
-        {
-            throw new NotImplementedException();
-        }
+        //public bool Add(CategoryModel item)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public bool Delete(CategoryModel item)
-        {
-            throw new NotImplementedException();
-        }
+        //public bool Delete(CategoryModel item)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public CategoryModel Get(CategoryModel item)
-        {
-            throw new NotImplementedException();
-        }
+        //public CategoryModel Get(CategoryModel item)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public IEnumerable<CategoryModel> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        //public IEnumerable<CategoryModel> GetAll()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

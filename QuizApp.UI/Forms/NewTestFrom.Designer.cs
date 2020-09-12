@@ -139,6 +139,7 @@
             this.cbo_category.Name = "cbo_category";
             this.cbo_category.Size = new System.Drawing.Size(121, 21);
             this.cbo_category.TabIndex = 8;
+            this.cbo_category.SelectedIndexChanged += new System.EventHandler(this.cbo_category_SelectedIndexChanged);
             // 
             // cbo_subcategory
             // 
@@ -147,6 +148,7 @@
             this.cbo_subcategory.Name = "cbo_subcategory";
             this.cbo_subcategory.Size = new System.Drawing.Size(121, 21);
             this.cbo_subcategory.TabIndex = 9;
+            this.cbo_subcategory.SelectedIndexChanged += new System.EventHandler(this.cbo_subcategory_SelectedIndexChanged);
             // 
             // cbo_topic
             // 
@@ -299,6 +301,7 @@
             this.lbl_addSubCategory.TabIndex = 27;
             this.lbl_addSubCategory.TabStop = true;
             this.lbl_addSubCategory.Text = "add";
+            this.lbl_addSubCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_addSubCategory_LinkClicked);
             // 
             // lbl_deleteTopic
             // 
@@ -328,6 +331,7 @@
             this.lbl_addTopic.TabIndex = 30;
             this.lbl_addTopic.TabStop = true;
             this.lbl_addTopic.Text = "add";
+            this.lbl_addTopic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_addTopic_LinkClicked);
             // 
             // NewTestFrom
             // 

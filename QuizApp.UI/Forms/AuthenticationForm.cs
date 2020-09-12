@@ -1,5 +1,6 @@
 ﻿using QuizApp.Logic;
 using QuizApp.Logic.Models;
+using QuizApp.Logic.Services.Implementations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,9 +50,9 @@ namespace QuizApp.UI
                     Password = txt_password.Text
                 };
 
-                UserRepository userRepository = new UserRepository();
+                UserService userService = new UserService();
 
-                //if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && userHelper.GetUser(userModel))
+                //if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && userService.LogIn(userModel))
                 //{
                     this.Hide();
                     StartForm startForm = new StartForm(txt_name.Text);
@@ -60,9 +61,9 @@ namespace QuizApp.UI
                 //}
                 //else
                 //{
-                //txt_name.Text = string.Empty;
-                //txt_password.Text = string.Empty;
-                //MessageBox.Show("Invalid name or password.", "Error");
+                //    txt_name.Text = string.Empty;
+                //    txt_password.Text = string.Empty;
+                //    MessageBox.Show("Invalid name or password.", "Error");
                 //}
             }
             catch (Exception ex)

@@ -1,5 +1,6 @@
 ﻿using QuizApp.Logic;
 using QuizApp.Logic.Models;
+using QuizApp.Logic.Services.Implementations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,11 +37,11 @@ namespace QuizApp.UI
                     Password = txt_password.Text
                 };
 
-                UserRepository userHelper = new UserRepository();
-
-                if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && !userHelper.Exist(userModel))
+                UserService userService = new UserService();
+                
+                if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && !userService.Exist(userModel))
                 {
-                    userHelper.Add(userModel);
+                    userService.Add(userModel);
                     this.Close();
                     MessageBox.Show("Created successfully.", "Success!!!");
                     this.authentication.Show();

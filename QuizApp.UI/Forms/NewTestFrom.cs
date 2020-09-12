@@ -1,6 +1,7 @@
 ﻿using QuizApp.Logic.Models;
-using QuizApp.Logic.Repository;
+using QuizApp.Logic.Services.Implementations;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,9 @@ namespace QuizApp.UI.Forms
     public partial class NewTestFrom : Form
     {
         private List<CategoryModel> categoryList;
+        private List<CategoryModel> subCategoryList;
+        private List<CategoryModel> topicList;
+
         public NewTestFrom()
         {
             InitializeComponent();
@@ -56,24 +60,11 @@ namespace QuizApp.UI.Forms
 
         private void lbl_addCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                CategoryModel categoryModel = new CategoryModel();
-                categoryModel.CategoryName = cbo_category.Text;
-                
-                CategoryRepository categoryHelper = new CategoryRepository();
-
-                if (!string.IsNullOrEmpty(categoryModel.CategoryName) && !categoryHelper.Exist(categoryModel))
-                {
-                    categoryHelper.AddCategory(categoryModel);
-                    MessageBox.Show("Added successfully!");
-                    categoryList.Clear();
-                    DisplayCategory();
-                }
-                else
-                {
-                    MessageBox.Show("This category already exists, or this field is empty!!!", "Error");
-                }
+            try 
+            { 
+                AddCategory(new ArrayList() { null, cbo_category.Text, "Category" });
+                categoryList.Clear();
+                DisplayCategory();
             }
             catch (Exception ex)
             {
@@ -81,22 +72,52 @@ namespace QuizApp.UI.Forms
             }
         }
 
+        private void AddCategory(ArrayList list)
+        {
+            CategoryService categoryService = new CategoryService();
+            CategoryModel categoryModel = new CategoryModel();
+            categoryModel.CategoryName = (string)list[1];
+            categoryModel.ParentCategoryId = (int?)list[0];
+
+            if (!string.IsNullOrEmpty(categoryModel.CategoryName) && !categoryService.Exist(categoryModel))
+            {
+                categoryService.Add(categoryModel);
+                MessageBox.Show("Added successfully!");
+            }
+            else
+            {
+                MessageBox.Show($"This {(string)list[2]} already exists, or this field is empty!!!", "Error");
+            }
+        }
+
         private void DisplayCategory()
         {
-            try
-            {
-                CategoryRepository categoryHelper = new CategoryRepository();
-                CategoryModel categoryModel = new CategoryModel();
-                categoryList = categoryHelper.GetAllCategories(categoryModel);
-                cbo_category.ValueMember = "CategoryId";
-                cbo_category.DisplayMember = "CategoryName";
-                cbo_category.DataSource = categoryList;
-                cbo_category.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
+            CategoryService categoryService = new CategoryService();
+            categoryList = categoryService.GetAllCategory();
+            cbo_category.ValueMember = "CategoryId";
+            cbo_category.DisplayMember = "CategoryName";
+            cbo_category.DataSource = categoryList;
+            cbo_category.SelectedIndex = -1;
+        }
+
+        private void DisplaySubCategory(int id)
+        {
+            CategoryService categoryService = new CategoryService();
+            subCategoryList = categoryService.GetSubCategories(id);
+            cbo_subcategory.ValueMember = "CategoryId";
+            cbo_subcategory.DisplayMember = "CategoryName";
+            cbo_subcategory.DataSource = subCategoryList;
+            cbo_subcategory.SelectedIndex = -1;
+        }
+
+        private void DisplayTopic(int id)
+        {
+            CategoryService categoryService = new CategoryService();
+            topicList = categoryService.GetSubCategories(id);
+            cbo_topic.ValueMember = "CategoryId";
+            cbo_topic.DisplayMember = "CategoryName";
+            cbo_topic.DataSource = topicList;
+            cbo_topic.SelectedIndex = -1;
         }
 
         private void lbl_deleteCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -106,17 +127,10 @@ namespace QuizApp.UI.Forms
                 if (!string.IsNullOrEmpty(cbo_category.Text))
                 {
                     int id = Convert.ToInt32(cbo_category.SelectedValue);
-                    CategoryRepository categoryHelper = new CategoryRepository();
-                    categoryHelper.DeleteCategory(id);
-                    foreach (var item in categoryList)
-                    {
-                        if (item.CategoryId == id)
-                        {
-                            MessageBox.Show("Deleted successfully");
-                            DisplayCategory();
-                            return;
-                        }
-                    }
+                    CategoryService categoryService = new CategoryService();
+                    categoryService.Delete(categoryService.Get(id));
+                    MessageBox.Show("Deleted successfully");
+                    DisplayCategory();
                 }
                 else
                 {
@@ -127,6 +141,48 @@ namespace QuizApp.UI.Forms
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
+        }
+
+        private void lbl_addSubCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cbo_subcategory.Text))
+            {
+                AddCategory(new ArrayList() { Convert.ToInt32(cbo_category.SelectedValue), cbo_subcategory.Text, "SubCategory" });
+                subCategoryList.Clear();
+                DisplaySubCategory(Convert.ToInt32(cbo_category.SelectedValue));
+            }
+            else
+            {
+                MessageBox.Show("This SubCategory already exists, or this field is empty!!!", "Error");
+            }
+        }
+
+        private void lbl_addTopic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cbo_subcategory.Text) && !string.IsNullOrEmpty(cbo_topic.Text))
+            {
+                AddCategory(new ArrayList() { Convert.ToInt32(cbo_subcategory.SelectedValue), cbo_topic.Text, "Topic" });
+                topicList.Clear();
+                DisplayTopic(Convert.ToInt32(cbo_subcategory.SelectedValue));
+            }
+            else
+            {
+                MessageBox.Show("This Topic already exists, or fields are empty!!!", "Error");
+                cbo_topic.Text = string.Empty;
+            }
+        }
+
+        private void cbo_category_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplaySubCategory(Convert.ToInt32(cbo_category.SelectedValue));
+            cbo_subcategory.Text = string.Empty;
+            cbo_topic.Text = string.Empty;
+        }
+
+        private void cbo_subcategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayTopic(Convert.ToInt32(cbo_subcategory.SelectedValue));
+            cbo_topic.Text = string.Empty;
         }
     }
 }
