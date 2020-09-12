@@ -53,7 +53,7 @@ namespace QuizApp.UI.Forms
         private bool FormVerification()
         {
             bool filled = true;
-            if (string.IsNullOrEmpty(txt_name.Text) || (!rbtn_yes.Checked && !rbtn_no.Checked))
+            if (string.IsNullOrEmpty(txt_name.Text) || (!rbtn_yes.Checked && !rbtn_no.Checked) || string.IsNullOrEmpty(cbo_category.Text))
                 filled = false;
             return filled;
         }
@@ -122,15 +122,34 @@ namespace QuizApp.UI.Forms
 
         private void lbl_deleteCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            int id = Convert.ToInt32(cbo_category.SelectedValue);
+            DeleteCategory(id, cbo_category.Text);
+            DisplayCategory();
+        }
+
+        private void lbl_deleteSubCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            int id = Convert.ToInt32(cbo_subcategory.SelectedValue);
+            DeleteCategory(id, cbo_subcategory.Text);
+            subCategoryList.Clear();
+        }
+
+        private void lbl_deleteTopic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            int id = Convert.ToInt32(cbo_topic.SelectedValue);
+            DeleteCategory(id, cbo_topic.Text);
+            topicList.Clear();
+        }
+
+        private void DeleteCategory(int id, string category)
+        {
             try
             {
-                if (!string.IsNullOrEmpty(cbo_category.Text))
+                if (!string.IsNullOrEmpty(category))
                 {
-                    int id = Convert.ToInt32(cbo_category.SelectedValue);
                     CategoryService categoryService = new CategoryService();
                     categoryService.Delete(categoryService.Get(id));
                     MessageBox.Show("Deleted successfully");
-                    DisplayCategory();
                 }
                 else
                 {
