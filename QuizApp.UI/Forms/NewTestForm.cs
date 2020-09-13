@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace QuizApp.UI.Forms
 {
-    public partial class NewTestFrom : Form
+    public partial class NewTestForm : Form
     {
         private List<CategoryModel> categoryList;
         private List<CategoryModel> subCategoryList;
         private List<CategoryModel> topicList;
 
-        public NewTestFrom()
+        public NewTestForm()
         {
             InitializeComponent();
             DisplayCategory();

@@ -21,7 +21,7 @@ namespace QuizApp.UI.Forms
         {
             try
             {
-                NewTestFrom newTest = new NewTestFrom();
+                NewTestForm newTest = new NewTestForm();
                 newTest.ShowDialog();
             }
             catch (Exception ex)

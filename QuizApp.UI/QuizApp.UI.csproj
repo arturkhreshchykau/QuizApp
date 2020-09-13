@@ -59,11 +59,11 @@
     <Compile Include="Forms\NewQuestionForm.Designer.cs">
       <DependentUpon>NewQuestionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NewTestFrom.cs">
+    <Compile Include="Forms\NewTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\NewTestFrom.Designer.cs">
-      <DependentUpon>NewTestFrom.cs</DependentUpon>
+    <Compile Include="Forms\NewTestForm.Designer.cs">
+      <DependentUpon>NewTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AuthenticationForm.cs">
       <SubType>Form</SubType>
@@ -94,8 +94,8 @@
     <EmbeddedResource Include="Forms\NewQuestionForm.resx">
       <DependentUpon>NewQuestionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NewTestFrom.resx">
-      <DependentUpon>NewTestFrom.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\NewTestForm.resx">
+      <DependentUpon>NewTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AuthenticationForm.resx">
       <DependentUpon>AuthenticationForm.cs</DependentUpon>
