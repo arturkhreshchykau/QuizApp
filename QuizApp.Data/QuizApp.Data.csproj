@@ -87,7 +87,6 @@
       <DependentUpon>QuizModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implementations\CategoryRepository.cs" />
     <Compile Include="Repositories\Implementations\GenericRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
   </ItemGroup>

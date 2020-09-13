@@ -29,5 +29,10 @@ namespace QuizApp.UI.Forms
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
         }
+
+        private void btn_edit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -29,33 +29,26 @@ namespace QuizApp.UI
 
         private void btn_create_Click(object sender, EventArgs e)
         {
-            try
+            UserModel userModel = new UserModel()
             {
-                UserModel userModel = new UserModel()
-                {
-                    Name = txt_name.Text,
-                    Password = txt_password.Text
-                };
+                Name = txt_name.Text,
+                Password = txt_password.Text
+            };
 
-                UserService userService = new UserService();
+            UserService userService = new UserService();
                 
-                if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && !userService.Exist(userModel))
-                {
-                    userService.Add(userModel);
-                    this.Close();
-                    MessageBox.Show("Created successfully.", "Success!!!");
-                    this.authentication.Show();
-                }
-                else
-                {
-                    MessageBox.Show("An account with the current name already exists, or some fields are empty.", "Error");
-                    txt_name.Text = string.Empty;
-                    txt_password.Text = string.Empty;
-                }
-            }
-            catch (Exception ex)
+            if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && !userService.Exist(userModel))
             {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
+                userService.Add(userModel);
+                this.Close();
+                MessageBox.Show("Created successfully.", "Done");
+                this.authentication.Show();
+            }
+            else
+            {
+                MessageBox.Show("An account with the current name already exists, or some fields are empty.", "Error");
+                txt_name.Text = string.Empty;
+                txt_password.Text = string.Empty;
             }
         }
     }

@@ -45,9 +45,6 @@
             this.rbtn_yes = new System.Windows.Forms.RadioButton();
             this.rbtn_no = new System.Windows.Forms.RadioButton();
             this.label8 = new System.Windows.Forms.Label();
-            this.btn_addQuestion = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lbl_numberOfQuestion = new System.Windows.Forms.Label();
             this.lbl_addCategory = new System.Windows.Forms.LinkLabel();
             this.label10 = new System.Windows.Forms.Label();
             this.lbl_deleteCategory = new System.Windows.Forms.LinkLabel();
@@ -87,7 +84,7 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(189, 395);
+            this.btn_cancel.Location = new System.Drawing.Point(180, 360);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(79, 31);
             this.btn_cancel.TabIndex = 3;
@@ -97,13 +94,13 @@
             // 
             // btn_createTest
             // 
-            this.btn_createTest.Enabled = false;
-            this.btn_createTest.Location = new System.Drawing.Point(285, 395);
+            this.btn_createTest.Location = new System.Drawing.Point(276, 360);
             this.btn_createTest.Name = "btn_createTest";
             this.btn_createTest.Size = new System.Drawing.Size(81, 31);
             this.btn_createTest.TabIndex = 4;
             this.btn_createTest.Text = "Create";
             this.btn_createTest.UseVisualStyleBackColor = true;
+            this.btn_createTest.Click += new System.EventHandler(this.btn_createTest_Click);
             // 
             // label3
             // 
@@ -186,6 +183,7 @@
             // rbtn_yes
             // 
             this.rbtn_yes.AutoSize = true;
+            this.rbtn_yes.Checked = true;
             this.rbtn_yes.Location = new System.Drawing.Point(170, 306);
             this.rbtn_yes.Name = "rbtn_yes";
             this.rbtn_yes.Size = new System.Drawing.Size(43, 17);
@@ -213,34 +211,6 @@
             this.label8.Size = new System.Drawing.Size(43, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "minutes";
-            // 
-            // btn_addQuestion
-            // 
-            this.btn_addQuestion.Location = new System.Drawing.Point(51, 363);
-            this.btn_addQuestion.Name = "btn_addQuestion";
-            this.btn_addQuestion.Size = new System.Drawing.Size(102, 23);
-            this.btn_addQuestion.TabIndex = 19;
-            this.btn_addQuestion.Text = "Add Question";
-            this.btn_addQuestion.UseVisualStyleBackColor = true;
-            this.btn_addQuestion.Click += new System.EventHandler(this.btn_addQuestion_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(49, 333);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(107, 13);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Number of questions:";
-            // 
-            // lbl_numberOfQuestion
-            // 
-            this.lbl_numberOfQuestion.AutoSize = true;
-            this.lbl_numberOfQuestion.Location = new System.Drawing.Point(162, 333);
-            this.lbl_numberOfQuestion.Name = "lbl_numberOfQuestion";
-            this.lbl_numberOfQuestion.Size = new System.Drawing.Size(13, 13);
-            this.lbl_numberOfQuestion.TabIndex = 21;
-            this.lbl_numberOfQuestion.Text = "0";
             // 
             // lbl_addCategory
             // 
@@ -339,7 +309,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 447);
+            this.ClientSize = new System.Drawing.Size(397, 414);
             this.Controls.Add(this.lbl_deleteTopic);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lbl_addTopic);
@@ -349,9 +319,6 @@
             this.Controls.Add(this.lbl_deleteCategory);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lbl_addCategory);
-            this.Controls.Add(this.lbl_numberOfQuestion);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.btn_addQuestion);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.rbtn_no);
             this.Controls.Add(this.rbtn_yes);
@@ -397,9 +364,6 @@
         private System.Windows.Forms.RadioButton rbtn_yes;
         private System.Windows.Forms.RadioButton rbtn_no;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btn_addQuestion;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lbl_numberOfQuestion;
         private System.Windows.Forms.LinkLabel lbl_addCategory;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.LinkLabel lbl_deleteCategory;

@@ -25,7 +25,13 @@ namespace QuizApp.Logic.Services.Implementations
             bool added;
             if (item != null)
             {
-                _userRepository.Add(Mapping(item));
+                User user = new User()
+                {
+                    UserName = item.Name,
+                    UserPassword = item.Password
+                };
+
+                _userRepository.Add(user);
                 added = true;
             }
             else
@@ -35,12 +41,12 @@ namespace QuizApp.Logic.Services.Implementations
             return added; 
         }
 
-        public bool Delete(UserModel item)
+        public bool Delete(int id)
         {
             bool deleted;
-            if (item != null)
+            if (id > 0)
             {
-                _userRepository.Delete(Mapping(item));
+                _userRepository.Delete(id);
                 deleted = true;
             }
             else
@@ -94,15 +100,6 @@ namespace QuizApp.Logic.Services.Implementations
                 exist = true;
 
             return exist;
-        }
-
-        private User Mapping(UserModel item)
-        {
-            return new User()
-            {
-                UserName = item.Name,
-                UserPassword = item.Password
-            };
         }
     }
 }

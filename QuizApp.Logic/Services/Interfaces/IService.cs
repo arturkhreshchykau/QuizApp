@@ -9,7 +9,7 @@ namespace QuizApp.Logic.Services.Interfaces
     public interface IService<T>
     {
         bool Add(T item);
-        bool Delete(T item);
+        bool Delete(int id);
         T Get(int id);
         IEnumerable<T> GetAll();
     }

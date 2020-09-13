@@ -36,9 +36,9 @@ namespace QuizApp.Data.Repositories.Implementations
             return _dbSet.Find(id);
         }
 
-        public void Delete(TEntity item)
+        public void Delete(int id)
         {
-            _dbSet.Remove(item);
+            _dbSet.Remove(GetById(id));
             _context.SaveChanges();
         }
     }

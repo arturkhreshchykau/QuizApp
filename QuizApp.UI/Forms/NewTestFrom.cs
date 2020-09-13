@@ -30,70 +30,84 @@ namespace QuizApp.UI.Forms
             this.Close();
         }
 
-        private void btn_addQuestion_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (FormVerification())
-                {
-                    NewQuestionForm newQuestion = new NewQuestionForm();
-                    newQuestion.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Please fill in the required fields", "Error");                        
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-        }
-
-        private bool FormVerification()
-        {
-            bool filled = true;
-            if (string.IsNullOrEmpty(txt_name.Text) || (!rbtn_yes.Checked && !rbtn_no.Checked) || string.IsNullOrEmpty(cbo_category.Text))
-                filled = false;
-            return filled;
-        }
-
+        #region Adding Category/SubCategory/Topic
         private void lbl_addCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try 
-            { 
-                AddCategory(new ArrayList() { null, cbo_category.Text, "Category" });
+            if (!string.IsNullOrEmpty(cbo_category.Text))
+            {
+                AddCategory(new List<string>() { string.Empty, cbo_category.Text, "Category" });
                 categoryList.Clear();
                 DisplayCategory();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
+                MessageBox.Show("This Category already exists, or this field is empty!!!", "Error");
             }
         }
 
-        private void AddCategory(ArrayList list)
+        private void lbl_addSubCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cbo_subcategory.Text) && cbo_category.SelectedIndex != -1)
+            {
+                AddCategory(new List<string>() { cbo_category.SelectedValue.ToString(), cbo_subcategory.Text, "SubCategory" });
+                subCategoryList.Clear();
+                DisplaySubCategory(Convert.ToInt32(cbo_category.SelectedValue));
+            }
+            else
+            {
+                MessageBox.Show("This SubCategory already exists or is empty, or Category is not selected!!!", "Error");
+                cbo_subcategory.Text = string.Empty;
+            }
+        }
+
+        private void lbl_addTopic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cbo_topic.Text) && cbo_subcategory.SelectedIndex != -1 && cbo_category.SelectedIndex != -1)
+            {
+                AddCategory(new List<string>() { cbo_subcategory.SelectedValue.ToString(), cbo_topic.Text, "Topic" });
+                topicList.Clear();
+                DisplayTopic(Convert.ToInt32(cbo_subcategory.SelectedValue));
+            }
+            else
+            {
+                MessageBox.Show("This Topic already exists or is empty, or some of the fields are not selected!!!", "Error");
+                cbo_topic.Text = string.Empty;
+            }
+        }
+
+        private void AddCategory(List<string> list)
         {
             CategoryService categoryService = new CategoryService();
             CategoryModel categoryModel = new CategoryModel();
-            categoryModel.CategoryName = (string)list[1];
-            categoryModel.ParentCategoryId = (int?)list[0];
+            categoryModel.CategoryName = list[1];
+            if (list[0] == string.Empty)
+            {
+                categoryModel.ParentCategoryId = null;
+            }
+            else
+            {
+                categoryModel.ParentCategoryId = Convert.ToInt32(list[0]);
+            }
 
-            if (!string.IsNullOrEmpty(categoryModel.CategoryName) && !categoryService.Exist(categoryModel))
+            var category = categoryService.GetAll().Where(x => x.CategoryName == categoryModel.CategoryName).SingleOrDefault();
+
+            if (category == null)
             {
                 categoryService.Add(categoryModel);
                 MessageBox.Show("Added successfully!");
             }
             else
             {
-                MessageBox.Show($"This {(string)list[2]} already exists, or this field is empty!!!", "Error");
+                MessageBox.Show($"This {list[2]} already exists.", "Error");
             }
         }
+        #endregion
 
+        #region Displaying Category/SubCategory/Topic 
         private void DisplayCategory()
         {
             CategoryService categoryService = new CategoryService();
-            categoryList = categoryService.GetAllCategory();
+            categoryList = categoryService.GetAll().Where(x => x.ParentCategoryId == null).ToList();
             cbo_category.ValueMember = "CategoryId";
             cbo_category.DisplayMember = "CategoryName";
             cbo_category.DataSource = categoryList;
@@ -119,77 +133,75 @@ namespace QuizApp.UI.Forms
             cbo_topic.DataSource = topicList;
             cbo_topic.SelectedIndex = -1;
         }
+        #endregion
 
+        #region Deleting Category/SubCategory/Topic
         private void lbl_deleteCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int id = Convert.ToInt32(cbo_category.SelectedValue);
-            DeleteCategory(id, cbo_category.Text);
-            DisplayCategory();
+            if (cbo_category.SelectedIndex != -1)
+            {
+                int categoryID = Convert.ToInt32(cbo_category.SelectedValue);
+                CategoryService categoryService = new CategoryService();
+
+                var subCategoryList = categoryService.GetSubCategories(categoryID);
+                
+                //* delete all topics for the current Category
+                foreach (var category in subCategoryList)
+                {
+                    categoryService.DeleteSelectedSubList(category.CategoryId);
+                }
+
+                //* delete all subcategories for the current Category
+                categoryService.DeleteSelectedSubList(categoryID);
+
+                MessageBox.Show("Deleted successfully");
+                DisplayCategory();
+                cbo_category.Text = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Please select the Category for deleting!", "Error");
+            }
         }
 
         private void lbl_deleteSubCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int id = Convert.ToInt32(cbo_subcategory.SelectedValue);
-            DeleteCategory(id, cbo_subcategory.Text);
-            subCategoryList.Clear();
+            if (cbo_category.SelectedIndex != -1 && cbo_subcategory.SelectedIndex != -1)
+            {
+                int id = Convert.ToInt32(cbo_subcategory.SelectedValue);
+                CategoryService categoryService = new CategoryService();
+                categoryService.DeleteSelectedSubList(id);
+                subCategoryList.Clear();
+                MessageBox.Show("Deleted successfully");
+                cbo_subcategory.Text = string.Empty;
+                int categoryID = Convert.ToInt32(cbo_category.SelectedValue);
+                DisplaySubCategory(categoryID);
+            }
+            else
+            {
+                MessageBox.Show("Please select the Category and SubCategory for deleting!", "Error");
+            }
         }
 
         private void lbl_deleteTopic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int id = Convert.ToInt32(cbo_topic.SelectedValue);
-            DeleteCategory(id, cbo_topic.Text);
-            topicList.Clear();
-        }
-
-        private void DeleteCategory(int id, string category)
-        {
-            try
+            if (cbo_category.SelectedIndex != -1 && cbo_subcategory.SelectedIndex != -1 && cbo_topic.SelectedIndex != -1)
             {
-                if (!string.IsNullOrEmpty(category))
-                {
-                    CategoryService categoryService = new CategoryService();
-                    categoryService.Delete(categoryService.Get(id));
-                    MessageBox.Show("Deleted successfully");
-                }
-                else
-                {
-                    MessageBox.Show("Please select the Category for deleting!", "Error");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-        }
-
-        private void lbl_addSubCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cbo_subcategory.Text))
-            {
-                AddCategory(new ArrayList() { Convert.ToInt32(cbo_category.SelectedValue), cbo_subcategory.Text, "SubCategory" });
-                subCategoryList.Clear();
-                DisplaySubCategory(Convert.ToInt32(cbo_category.SelectedValue));
-            }
-            else
-            {
-                MessageBox.Show("This SubCategory already exists, or this field is empty!!!", "Error");
-            }
-        }
-
-        private void lbl_addTopic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cbo_subcategory.Text) && !string.IsNullOrEmpty(cbo_topic.Text))
-            {
-                AddCategory(new ArrayList() { Convert.ToInt32(cbo_subcategory.SelectedValue), cbo_topic.Text, "Topic" });
+                int id = Convert.ToInt32(cbo_topic.SelectedValue);
+                CategoryService categoryService = new CategoryService();
+                categoryService.Delete(id);
                 topicList.Clear();
-                DisplayTopic(Convert.ToInt32(cbo_subcategory.SelectedValue));
+                MessageBox.Show("Deleted successfully");
+                cbo_topic.Text = string.Empty;
+                int subCategoryID = Convert.ToInt32(cbo_subcategory.SelectedValue);
+                DisplayTopic(subCategoryID);
             }
             else
             {
-                MessageBox.Show("This Topic already exists, or fields are empty!!!", "Error");
-                cbo_topic.Text = string.Empty;
+                MessageBox.Show("Please select the Category, SubCategory or Topic for deleting!", "Error");
             }
         }
+        #endregion 
 
         private void cbo_category_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -202,6 +214,20 @@ namespace QuizApp.UI.Forms
         {
             DisplayTopic(Convert.ToInt32(cbo_subcategory.SelectedValue));
             cbo_topic.Text = string.Empty;
+        }
+
+        private void btn_createTest_Click(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(txt_name.Text) || !string.IsNullOrEmpty(cbo_category.Text))
+            {
+                                
+                MessageBox.Show("Created successfully.", "Done");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please name the test and select at least a category.", "Error");
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace QuizApp.Logic.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public bool Delete(TestModel item)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

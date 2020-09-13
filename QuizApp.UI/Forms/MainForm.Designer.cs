@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_edit = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.txt_addNew = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -59,14 +59,15 @@
             this.button1.Text = "Pass";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_edit
             // 
-            this.button2.Location = new System.Drawing.Point(470, 158);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 37);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Edit";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_edit.Location = new System.Drawing.Point(470, 158);
+            this.btn_edit.Name = "btn_edit";
+            this.btn_edit.Size = new System.Drawing.Size(103, 37);
+            this.btn_edit.TabIndex = 3;
+            this.btn_edit.Text = "Edit";
+            this.btn_edit.UseVisualStyleBackColor = true;
+            this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
             // 
             // button3
             // 
@@ -131,7 +132,7 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.txt_addNew);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btn_edit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -147,7 +148,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_edit;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button txt_addNew;
         private System.Windows.Forms.ListView listView1;

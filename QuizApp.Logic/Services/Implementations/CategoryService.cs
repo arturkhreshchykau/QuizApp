@@ -13,11 +13,11 @@ namespace QuizApp.Logic.Services.Implementations
 {
     public class CategoryService : ICategoryService
     {
-        private IGenericRepository<Category> _categoryService;
+        private IGenericRepository<Category> _categoryRepository;
 
         public CategoryService()
         {
-            _categoryService = new GenericRepository<Category>();
+            _categoryRepository = new GenericRepository<Category>();
         }
 
         public bool Add(CategoryModel item)
@@ -25,7 +25,14 @@ namespace QuizApp.Logic.Services.Implementations
             bool added;
             if (item != null)
             {
-                _categoryService.Add(Mapping(item));
+                Category category = new Category()
+                {
+                    CategoryID = item.CategoryId,
+                    ParentCategoryID = item.ParentCategoryId,
+                    CategoryName = item.CategoryName
+                };
+
+                _categoryRepository.Add(category);
                 added = true;
             }
             else
@@ -35,12 +42,12 @@ namespace QuizApp.Logic.Services.Implementations
             return added;
         }
 
-        public bool Delete(CategoryModel item)
+        public bool Delete(int id)
         {
             bool deleted;
-            if (item != null)
+            if (id > 0)
             {
-                _categoryService.Delete(Mapping(item));
+                _categoryRepository.Delete(id);
                 deleted = true;
             }
             else
@@ -58,7 +65,7 @@ namespace QuizApp.Logic.Services.Implementations
             }
             else
             {
-                Category user = _categoryService.GetById(id);
+                Category user = _categoryRepository.GetById(id);
                 return new CategoryModel()
                 {
                     CategoryId = user.CategoryID,
@@ -70,14 +77,9 @@ namespace QuizApp.Logic.Services.Implementations
 
         public IEnumerable<CategoryModel> GetAll()
         {
-            return _categoryService.GetAll()
+            return _categoryRepository.GetAll()
                 .Select(category => new CategoryModel(){ CategoryId = category.CategoryID, CategoryName = category.CategoryName, ParentCategoryId = category.ParentCategoryID})
                 .AsEnumerable();
-        }
-
-        public List<CategoryModel> GetAllCategory()
-        {
-            return GetAll().Where(x => x.ParentCategoryId == null).ToList();
         }
 
         public List<CategoryModel> GetSubCategories(int id)
@@ -85,24 +87,16 @@ namespace QuizApp.Logic.Services.Implementations
             return GetAll().Where(x => x.ParentCategoryId == id).ToList();
         }
 
-        public bool Exist(CategoryModel item)
+        public void DeleteSelectedSubList(int id)
         {
-            var user = GetAll().Where(x => x.CategoryName == item.CategoryName).SingleOrDefault();
-            bool exist = false;
-            if (user != null)
-                exist = true;
-
-            return exist;
-        }
-
-        private Category Mapping(CategoryModel item)
-        {
-            return new Category()
+            var subCategories = GetSubCategories(id);
+            //* delete all topics
+            foreach (var topic in subCategories)
             {
-                CategoryID = item.CategoryId,
-                ParentCategoryID = item.ParentCategoryId,
-                CategoryName = item.CategoryName
-            };
+                Delete(topic.CategoryId);
+            }
+            //* delete current subCategory
+            Delete(id);
         }
     }
 }
