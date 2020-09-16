@@ -13,7 +13,7 @@ namespace QuizApp.Logic.Services.Implementations
 {
     public class CategoryService : ICategoryService
     {
-        private IGenericRepository<Category> _categoryRepository;
+        private readonly IGenericRepository<Category> _categoryRepository;
 
         public CategoryService()
         {

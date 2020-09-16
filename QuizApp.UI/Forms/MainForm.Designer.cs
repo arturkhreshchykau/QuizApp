@@ -33,11 +33,12 @@
             this.btn_edit = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.txt_addNew = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lv_testList = new System.Windows.Forms.ListView();
             this.ch_testName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_categoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_timer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_isLiveCheck = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btn_close = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -77,6 +78,7 @@
             this.button3.TabIndex = 4;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // txt_addNew
             // 
@@ -88,22 +90,23 @@
             this.txt_addNew.UseVisualStyleBackColor = true;
             this.txt_addNew.Click += new System.EventHandler(this.txt_addNew_Click);
             // 
-            // listView1
+            // lv_testList
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lv_testList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ch_testName,
             this.ch_categoryName,
             this.ch_timer,
             this.ch_isLiveCheck});
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(22, 85);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(415, 301);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lv_testList.FullRowSelect = true;
+            this.lv_testList.GridLines = true;
+            this.lv_testList.HideSelection = false;
+            this.lv_testList.Location = new System.Drawing.Point(22, 85);
+            this.lv_testList.MultiSelect = false;
+            this.lv_testList.Name = "lv_testList";
+            this.lv_testList.Size = new System.Drawing.Size(415, 301);
+            this.lv_testList.TabIndex = 6;
+            this.lv_testList.UseCompatibleStateImageBehavior = false;
+            this.lv_testList.View = System.Windows.Forms.View.Details;
             // 
             // ch_testName
             // 
@@ -124,12 +127,23 @@
             this.ch_isLiveCheck.Text = "Instantly checking";
             this.ch_isLiveCheck.Width = 100;
             // 
+            // btn_close
+            // 
+            this.btn_close.Location = new System.Drawing.Point(32, 463);
+            this.btn_close.Name = "btn_close";
+            this.btn_close.Size = new System.Drawing.Size(75, 23);
+            this.btn_close.TabIndex = 7;
+            this.btn_close.Text = "Close";
+            this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 508);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.btn_close);
+            this.Controls.Add(this.lv_testList);
             this.Controls.Add(this.txt_addNew);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btn_edit);
@@ -151,10 +165,11 @@
         private System.Windows.Forms.Button btn_edit;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button txt_addNew;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lv_testList;
         private System.Windows.Forms.ColumnHeader ch_testName;
         private System.Windows.Forms.ColumnHeader ch_categoryName;
         private System.Windows.Forms.ColumnHeader ch_timer;
         private System.Windows.Forms.ColumnHeader ch_isLiveCheck;
+        private System.Windows.Forms.Button btn_close;
     }
 }

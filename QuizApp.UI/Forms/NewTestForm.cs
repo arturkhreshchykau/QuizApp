@@ -114,7 +114,7 @@ namespace QuizApp.UI.Forms
             cbo_category.SelectedIndex = -1;
         }
 
-        private void DisplaySubCategory(int id)
+        public void DisplaySubCategory(int id)
         {
             CategoryService categoryService = new CategoryService();
             subCategoryList = categoryService.GetSubCategories(id);
@@ -124,7 +124,7 @@ namespace QuizApp.UI.Forms
             cbo_subcategory.SelectedIndex = -1;
         }
 
-        private void DisplayTopic(int id)
+        public void DisplayTopic(int id)
         {
             CategoryService categoryService = new CategoryService();
             topicList = categoryService.GetSubCategories(id);
@@ -218,9 +218,40 @@ namespace QuizApp.UI.Forms
 
         private void btn_createTest_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txt_name.Text) || !string.IsNullOrEmpty(cbo_category.Text))
+            if(!string.IsNullOrEmpty(txt_testName.Text) && cbo_category.SelectedIndex != -1)
             {
-                                
+                int categoryID;
+                if (cbo_topic.SelectedValue != null)
+                {
+                    categoryID = Convert.ToInt32(cbo_topic.SelectedValue);
+                }
+                else if (cbo_subcategory.SelectedValue != null)
+                {
+                    categoryID = Convert.ToInt32(cbo_subcategory.SelectedValue);
+                }
+                else
+                {
+                    categoryID = Convert.ToInt32(cbo_category.SelectedValue);
+                }
+
+                TestModel testModel = new TestModel()
+                {
+                    TestName = txt_testName.Text,
+                    CategoryID = categoryID,
+                    isLiveCheck = rbtn_no.Checked ? true : false,
+                };
+
+                if (txt_timer.Text == string.Empty)
+                {
+                    testModel.Timer = null;
+                }
+                else
+                {
+                    testModel.Timer = Convert.ToInt32(txt_timer.Text);
+                }
+                
+                TestService testService = new TestService();
+                testService.Add(testModel);
                 MessageBox.Show("Created successfully.", "Done");
                 this.Close();
             }

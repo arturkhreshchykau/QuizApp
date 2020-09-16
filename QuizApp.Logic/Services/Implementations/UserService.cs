@@ -13,7 +13,7 @@ namespace QuizApp.Logic.Services.Implementations
 {
     public class UserService : IUserService
     {
-        private IGenericRepository<User> _userRepository;
+        private readonly IGenericRepository<User> _userRepository;
 
         public UserService()
         {

@@ -26,7 +26,6 @@ namespace QuizApp.Data.App_Data
         public int CategoryID { get; set; }
         public Nullable<int> Timer { get; set; }
         public bool isLiveCheck { get; set; }
-        public bool Deleted { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

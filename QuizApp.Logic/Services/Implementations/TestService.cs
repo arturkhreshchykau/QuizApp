@@ -1,4 +1,7 @@
-﻿using QuizApp.Logic.Models;
+﻿using QuizApp.Data.App_Data;
+using QuizApp.Data.Repositories.Implementations;
+using QuizApp.Data.Repositories.Interfaces;
+using QuizApp.Logic.Models;
 using QuizApp.Logic.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,24 +13,79 @@ namespace QuizApp.Logic.Services.Implementations
 {
     public class TestService : ITestService
     {
+        private readonly IGenericRepository<Test> _testRepository;
+        public TestService()
+        {
+            _testRepository = new GenericRepository<Test>();
+        }
         public bool Add(TestModel item)
         {
-            throw new NotImplementedException();
+            bool added;
+            if (item != null)
+            {
+                Test test = new Test()
+                {
+                    TestName = item.TestName,
+                    CategoryID = item.CategoryID,
+                    Timer = item.Timer,
+                    isLiveCheck = item.isLiveCheck,
+                };
+
+                _testRepository.Add(test);
+                added = true;
+            }
+            else
+            {
+                added = false;
+            }
+            return added;
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool deleted;
+            if (id > 0)
+            {
+                _testRepository.Delete(id);
+                deleted = true;
+            }
+            else
+            {
+                deleted = false;
+            }
+            return deleted;
         }
 
         public TestModel Get(int id)
         {
-            throw new NotImplementedException();
+            if (id < 1)
+            {
+                return null;
+            }
+            else
+            {
+                var test = _testRepository.GetById(id);
+                return new TestModel()
+                {
+                    TestID = test.TestID,
+                    TestName = test.TestName,
+                    CategoryID = test.CategoryID,
+                    Timer = test.Timer,
+                    isLiveCheck = test.isLiveCheck,
+                };
+            }
         }
 
         public IEnumerable<TestModel> GetAll()
         {
-            throw new NotImplementedException();
+            return _testRepository.GetAll()
+                .Select(test => new TestModel {
+                    TestID = test.TestID,
+                    TestName = test.TestName,
+                    CategoryID = test.CategoryID,
+                    Timer = test.Timer,
+                    isLiveCheck = test.isLiveCheck,
+                }).AsEnumerable();
         }
     }
 }
