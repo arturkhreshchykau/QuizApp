@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Logic.Services.Interfaces
 {
-    public interface ITestService : IService<TestModel>
+    public interface IStatisticService : IService<StatisticModel>
     {
     }
 }

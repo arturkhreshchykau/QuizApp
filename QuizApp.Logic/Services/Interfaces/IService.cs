@@ -11,6 +11,7 @@ namespace QuizApp.Logic.Services.Interfaces
         bool Add(T item);
         bool Delete(int id);
         T Get(int id);
+        bool Update(T item);
         IEnumerable<T> GetAll();
     }
 }

@@ -26,6 +26,12 @@ namespace QuizApp.Data.Repositories.Implementations
             _context.SaveChanges();
         }
 
+        public void Update(TEntity item)
+        {
+            _context.Entry(item).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
         public IQueryable<TEntity> GetAll()
         {
             return _dbSet.AsNoTracking();

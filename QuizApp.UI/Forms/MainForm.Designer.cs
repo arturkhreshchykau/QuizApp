@@ -39,6 +39,7 @@
             this.ch_timer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_isLiveCheck = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_close = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -53,40 +54,40 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(470, 103);
+            this.button1.Location = new System.Drawing.Point(470, 85);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 37);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Pass";
+            this.button1.Text = "Pass Test";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // btn_edit
             // 
-            this.btn_edit.Location = new System.Drawing.Point(470, 158);
+            this.btn_edit.Location = new System.Drawing.Point(470, 140);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(103, 37);
             this.btn_edit.TabIndex = 3;
-            this.btn_edit.Text = "Edit";
+            this.btn_edit.Text = "Edit Test";
             this.btn_edit.UseVisualStyleBackColor = true;
             this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(470, 215);
+            this.button3.Location = new System.Drawing.Point(470, 197);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(103, 37);
             this.button3.TabIndex = 4;
-            this.button3.Text = "Delete";
+            this.button3.Text = "Delete Test";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // txt_addNew
             // 
-            this.txt_addNew.Location = new System.Drawing.Point(470, 296);
+            this.txt_addNew.Location = new System.Drawing.Point(470, 253);
             this.txt_addNew.Name = "txt_addNew";
             this.txt_addNew.Size = new System.Drawing.Size(103, 37);
             this.txt_addNew.TabIndex = 5;
-            this.txt_addNew.Text = "Add New";
+            this.txt_addNew.Text = "Add New Test";
             this.txt_addNew.UseVisualStyleBackColor = true;
             this.txt_addNew.Click += new System.EventHandler(this.txt_addNew_Click);
             // 
@@ -137,11 +138,22 @@
             this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(470, 309);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 37);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Show Questions";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 508);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.lv_testList);
             this.Controls.Add(this.txt_addNew);
@@ -152,7 +164,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
+            this.Text = "Main";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,5 +183,6 @@
         private System.Windows.Forms.ColumnHeader ch_timer;
         private System.Windows.Forms.ColumnHeader ch_isLiveCheck;
         private System.Windows.Forms.Button btn_close;
+        private System.Windows.Forms.Button button2;
     }
 }

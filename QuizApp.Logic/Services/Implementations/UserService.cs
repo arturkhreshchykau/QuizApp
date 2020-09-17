@@ -101,5 +101,28 @@ namespace QuizApp.Logic.Services.Implementations
 
             return exist;
         }
+
+        public bool Update(UserModel item)
+        {
+            bool updated;
+            if (item != null || item.ID < 0)
+            {
+                User user = new User()
+                {
+                    UserID = item.ID,
+                    UserName = item.Name,
+                    UserPassword = item.Password
+                };
+
+                _userRepository.Update(user);
+                updated = true;
+            }
+            else
+            {
+                updated = false;
+            }
+
+            return updated;
+        }
     }
 }

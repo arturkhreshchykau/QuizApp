@@ -18,6 +18,7 @@ namespace QuizApp.UI.Forms
         private List<CategoryModel> categoryList;
         private List<CategoryModel> subCategoryList;
         private List<CategoryModel> topicList;
+        public int TestID { get; set; }
 
         public NewTestForm()
         {
@@ -94,7 +95,7 @@ namespace QuizApp.UI.Forms
             if (category == null)
             {
                 categoryService.Add(categoryModel);
-                MessageBox.Show("Added successfully!");
+                MessageBox.Show("Added successfully!", "Done");
             }
             else
             {
@@ -241,7 +242,7 @@ namespace QuizApp.UI.Forms
                     isLiveCheck = rbtn_no.Checked ? true : false,
                 };
 
-                if (txt_timer.Text == string.Empty)
+                if (txt_timer.Text == string.Empty || txt_timer.Text == "0")
                 {
                     testModel.Timer = null;
                 }
@@ -251,8 +252,19 @@ namespace QuizApp.UI.Forms
                 }
                 
                 TestService testService = new TestService();
-                testService.Add(testModel);
-                MessageBox.Show("Created successfully.", "Done");
+                if (btn_createTest.Text == "Update")
+                {
+                    testModel.TestID = TestID;
+
+                    if (testService.Update(testModel))
+                        MessageBox.Show("Updated successfully.", "Done");
+                }
+                else
+                {
+                    testService.Add(testModel);
+                    MessageBox.Show("Created successfully.", "Done");
+                }
+                
                 this.Close();
             }
             else

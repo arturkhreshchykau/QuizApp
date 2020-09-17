@@ -54,7 +54,6 @@
             this.lbl_deleteTopic = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
             this.lbl_addTopic = new System.Windows.Forms.LinkLabel();
-            this.btn_addQuestion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_name
@@ -85,7 +84,7 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(153, 355);
+            this.btn_cancel.Location = new System.Drawing.Point(153, 341);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(79, 31);
             this.btn_cancel.TabIndex = 3;
@@ -95,7 +94,7 @@
             // 
             // btn_createTest
             // 
-            this.btn_createTest.Location = new System.Drawing.Point(249, 355);
+            this.btn_createTest.Location = new System.Drawing.Point(249, 341);
             this.btn_createTest.Name = "btn_createTest";
             this.btn_createTest.Size = new System.Drawing.Size(81, 31);
             this.btn_createTest.TabIndex = 4;
@@ -306,22 +305,11 @@
             this.lbl_addTopic.Text = "add";
             this.lbl_addTopic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_addTopic_LinkClicked);
             // 
-            // btn_addQuestion
-            // 
-            this.btn_addQuestion.Location = new System.Drawing.Point(24, 317);
-            this.btn_addQuestion.Name = "btn_addQuestion";
-            this.btn_addQuestion.Size = new System.Drawing.Size(93, 23);
-            this.btn_addQuestion.TabIndex = 33;
-            this.btn_addQuestion.Text = "Add Question";
-            this.btn_addQuestion.UseVisualStyleBackColor = true;
-            this.btn_addQuestion.Visible = false;
-            // 
             // NewTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 414);
-            this.Controls.Add(this.btn_addQuestion);
+            this.ClientSize = new System.Drawing.Size(379, 397);
             this.Controls.Add(this.lbl_deleteTopic);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lbl_addTopic);
@@ -360,7 +348,6 @@
         #endregion
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.Button btn_createTest;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.LinkLabel lbl_addCategory;
@@ -372,7 +359,6 @@
         private System.Windows.Forms.LinkLabel lbl_deleteTopic;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.LinkLabel lbl_addTopic;
-        public System.Windows.Forms.Button btn_addQuestion;
         public System.Windows.Forms.TextBox txt_testName;
         public System.Windows.Forms.ComboBox cbo_category;
         public System.Windows.Forms.ComboBox cbo_subcategory;
@@ -385,5 +371,6 @@
         public System.Windows.Forms.Label lbl_subCategory;
         public System.Windows.Forms.Label lbl_topic;
         public System.Windows.Forms.Label lbl_timer;
+        public System.Windows.Forms.Button btn_createTest;
     }
 }

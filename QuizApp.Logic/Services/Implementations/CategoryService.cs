@@ -65,12 +65,12 @@ namespace QuizApp.Logic.Services.Implementations
             }
             else
             {
-                Category user = _categoryRepository.GetById(id);
+                Category category = _categoryRepository.GetById(id);
                 return new CategoryModel()
                 {
-                    CategoryId = user.CategoryID,
-                    ParentCategoryId = user.ParentCategoryID,
-                    CategoryName = user.CategoryName
+                    CategoryId = category.CategoryID,
+                    ParentCategoryId = category.ParentCategoryID,
+                    CategoryName = category.CategoryName
                 };
             }
         }
@@ -97,6 +97,29 @@ namespace QuizApp.Logic.Services.Implementations
             }
             //* delete current subCategory
             Delete(id);
+        }
+
+        public bool Update(CategoryModel item)
+        {
+            bool updated;
+            if (item != null || item.CategoryId < 0)
+            {
+                Category category = new Category()
+                {
+                    CategoryID = item.CategoryId,
+                    CategoryName = item.CategoryName,
+                    ParentCategoryID = item.ParentCategoryId
+                };
+
+                _categoryRepository.Update(category);
+                updated = true;
+            }
+            else
+            {
+                updated = false;
+            }
+
+            return updated;
         }
     }
 }

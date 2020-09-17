@@ -137,12 +137,12 @@
 
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_login;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_name;
         private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.LinkLabel lbl_creatNewAccount;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txt_name;
     }
 }
 

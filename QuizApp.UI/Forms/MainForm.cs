@@ -42,12 +42,22 @@ namespace QuizApp.UI.Forms
                 {
                     CategoryService categoryService = new CategoryService();
                     NewTestForm testForm = new NewTestForm();
-                    testForm.btn_addQuestion.Visible = true;
                     var test = (TestModel)lv_testList.SelectedItems[0].Tag;
+                    testForm.TestID = test.TestID;
+
                     var allCategory = categoryService.GetAll();
                     testForm.txt_testName.Text = test.TestName;
                     testForm.txt_timer.Text = test.Timer.ToString();
-                    testForm.rbtn_yes.Checked = test.isLiveCheck != true;
+                    if (test.isLiveCheck)
+                    {
+                        testForm.rbtn_no.Checked = true;
+                    }
+                    else
+                    {
+                        testForm.rbtn_yes.Checked = true;
+                    }
+
+                    testForm.btn_createTest.Text = "Update";
 
                     CategoryModel topic = allCategory.Where(x => x.CategoryId == test.CategoryID).Single();
                     CategoryModel subCategory = allCategory.Where(x => x.CategoryId == topic.ParentCategoryId).SingleOrDefault();
@@ -150,6 +160,28 @@ namespace QuizApp.UI.Forms
         private void btn_close_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lv_testList.SelectedItems.Count > 0)
+                {
+                    var test = (TestModel)lv_testList.SelectedItems[0].Tag;
+                    QuestionListForm questionListForm = new QuestionListForm();
+                    questionListForm.TestID = test.TestID;
+                    questionListForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a test", "Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
         }
     }
 }

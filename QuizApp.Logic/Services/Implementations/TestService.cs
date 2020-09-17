@@ -87,5 +87,30 @@ namespace QuizApp.Logic.Services.Implementations
                     isLiveCheck = test.isLiveCheck,
                 }).AsEnumerable();
         }
+
+        public bool Update(TestModel item)
+        {
+            bool updated;
+            if (item != null && item.TestID > 0 )
+            {
+                Test test = new Test()
+                {
+                    TestID = item.TestID,
+                    TestName = item.TestName,
+                    CategoryID = item.CategoryID,
+                    Timer = item.Timer,
+                    isLiveCheck = item.isLiveCheck
+                };
+
+                _testRepository.Update(test);
+                updated = true;
+            }
+            else
+            {
+                updated = false;
+            }
+
+            return updated;
+        }
     }
 }

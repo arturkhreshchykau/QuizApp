@@ -103,7 +103,7 @@
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(99, 36);
             this.btn_cancel.TabIndex = 8;
-            this.btn_cancel.Text = "Cancel";
+            this.btn_cancel.Text = "Close";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
@@ -115,6 +115,7 @@
             this.btn_save.TabIndex = 9;
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // lbl_labelAnswer
             // 

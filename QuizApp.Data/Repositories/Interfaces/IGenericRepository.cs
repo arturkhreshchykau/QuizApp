@@ -10,6 +10,7 @@ namespace QuizApp.Data.Repositories.Interfaces
     {
         void Add(TEntity item);
         TEntity GetById(int id);
+        void Update(TEntity item);
         IQueryable<TEntity> GetAll();
         void Delete(int id);
     }
