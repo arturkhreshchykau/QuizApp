@@ -52,19 +52,19 @@ namespace QuizApp.UI
 
                 UserService userService = new UserService();
 
-                //if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && userService.LogIn(userModel))
-                //{
+                if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && userService.LogIn(userModel))
+                {
                     this.Hide();
                     StartForm startForm = new StartForm(txt_name.Text);
                     startForm.Closed += (s, args) => this.Close();
                     startForm.Show();
-                //}
-                //else
-                //{
-                //    txt_name.Text = string.Empty;
-                //    txt_password.Text = string.Empty;
-                //    MessageBox.Show("Invalid name or password.", "Error");
-                //}
+                }
+                else
+                {
+                    txt_name.Text = string.Empty;
+                    txt_password.Text = string.Empty;
+                    MessageBox.Show("Invalid name or password.", "Error");
+                }
             }
             catch (Exception ex)
             {

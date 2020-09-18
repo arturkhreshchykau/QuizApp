@@ -40,7 +40,7 @@
             this.lbl_labelAnswer = new System.Windows.Forms.Label();
             this.rbtn_yes = new System.Windows.Forms.RadioButton();
             this.rbtn_no = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_isOpen = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txt_question
@@ -151,21 +151,21 @@
             this.rbtn_no.UseVisualStyleBackColor = true;
             this.rbtn_no.CheckedChanged += new System.EventHandler(this.rbtn_no_CheckedChanged);
             // 
-            // label2
+            // lbl_isOpen
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Is Open? :";
+            this.lbl_isOpen.AutoSize = true;
+            this.lbl_isOpen.Location = new System.Drawing.Point(35, 23);
+            this.lbl_isOpen.Name = "lbl_isOpen";
+            this.lbl_isOpen.Size = new System.Drawing.Size(56, 13);
+            this.lbl_isOpen.TabIndex = 13;
+            this.lbl_isOpen.Text = "Is Open? :";
             // 
             // NewQuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 467);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_isOpen);
             this.Controls.Add(this.rbtn_no);
             this.Controls.Add(this.rbtn_yes);
             this.Controls.Add(this.lbl_labelAnswer);
@@ -188,19 +188,18 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txt_question;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_correctAnswer;
-        private System.Windows.Forms.TextBox txt_secondAnswer;
-        private System.Windows.Forms.TextBox txt_thirdAnswer;
-        private System.Windows.Forms.TextBox txt_fourthAnswer;
-        private System.Windows.Forms.Label lbl_correctAnswer;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.Button btn_save;
-        private System.Windows.Forms.Label lbl_labelAnswer;
-        private System.Windows.Forms.RadioButton rbtn_yes;
-        private System.Windows.Forms.RadioButton rbtn_no;
-        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox txt_question;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox txt_correctAnswer;
+        public System.Windows.Forms.TextBox txt_secondAnswer;
+        public System.Windows.Forms.TextBox txt_thirdAnswer;
+        public System.Windows.Forms.TextBox txt_fourthAnswer;
+        public System.Windows.Forms.Label lbl_correctAnswer;
+        public System.Windows.Forms.Label lbl_labelAnswer;
+        public System.Windows.Forms.RadioButton rbtn_yes;
+        public System.Windows.Forms.RadioButton rbtn_no;
+        public System.Windows.Forms.Label lbl_isOpen;
+        public System.Windows.Forms.Button btn_save;
     }
 }

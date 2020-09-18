@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_tableTitle = new System.Windows.Forms.Label();
             this.lv_questionList = new System.Windows.Forms.ListView();
             this.ch_questionName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_answer1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -38,17 +38,18 @@
             this.btn_addNew = new System.Windows.Forms.Button();
             this.btn_editQuestion = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // lbl_tableTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(153, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Questions for";
+            this.lbl_tableTitle.AutoSize = true;
+            this.lbl_tableTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_tableTitle.Location = new System.Drawing.Point(153, 42);
+            this.lbl_tableTitle.Name = "lbl_tableTitle";
+            this.lbl_tableTitle.Size = new System.Drawing.Size(104, 20);
+            this.lbl_tableTitle.TabIndex = 0;
+            this.lbl_tableTitle.Text = "Questions for";
             // 
             // lv_questionList
             // 
@@ -58,6 +59,7 @@
             this.ch_answer2,
             this.ch_asnwer3,
             this.ch_asnwer4});
+            this.lv_questionList.FullRowSelect = true;
             this.lv_questionList.GridLines = true;
             this.lv_questionList.HideSelection = false;
             this.lv_questionList.Location = new System.Drawing.Point(28, 82);
@@ -111,6 +113,7 @@
             this.btn_editQuestion.TabIndex = 3;
             this.btn_editQuestion.Text = "Edit";
             this.btn_editQuestion.UseVisualStyleBackColor = true;
+            this.btn_editQuestion.Click += new System.EventHandler(this.btn_editQuestion_Click);
             // 
             // btn_close
             // 
@@ -122,16 +125,27 @@
             this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
+            // btn_delete
+            // 
+            this.btn_delete.Location = new System.Drawing.Point(748, 434);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(87, 30);
+            this.btn_delete.TabIndex = 5;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
             // QuestionListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 494);
+            this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.btn_editQuestion);
             this.Controls.Add(this.btn_addNew);
             this.Controls.Add(this.lv_questionList);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_tableTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "QuestionListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -143,7 +157,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_tableTitle;
         private System.Windows.Forms.ListView lv_questionList;
         private System.Windows.Forms.ColumnHeader ch_questionName;
         private System.Windows.Forms.ColumnHeader ch_answer1;
@@ -153,5 +167,6 @@
         private System.Windows.Forms.Button btn_addNew;
         private System.Windows.Forms.Button btn_editQuestion;
         private System.Windows.Forms.Button btn_close;
+        private System.Windows.Forms.Button btn_delete;
     }
 }

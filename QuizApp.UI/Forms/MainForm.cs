@@ -169,8 +169,7 @@ namespace QuizApp.UI.Forms
                 if (lv_testList.SelectedItems.Count > 0)
                 {
                     var test = (TestModel)lv_testList.SelectedItems[0].Tag;
-                    QuestionListForm questionListForm = new QuestionListForm();
-                    questionListForm.TestID = test.TestID;
+                    QuestionListForm questionListForm = new QuestionListForm(test.TestID, test.TestName); 
                     questionListForm.ShowDialog();
                 }
                 else
