@@ -119,7 +119,8 @@ namespace QuizApp.UI.Forms
         {
             if (!string.IsNullOrEmpty(txt_question.Text)
                    && !string.IsNullOrEmpty(txt_correctAnswer.Text) && !string.IsNullOrEmpty(txt_secondAnswer.Text)
-                   && !string.IsNullOrEmpty(txt_thirdAnswer.Text) && !string.IsNullOrEmpty(txt_fourthAnswer.Text))
+                   && !string.IsNullOrEmpty(txt_thirdAnswer.Text) && !string.IsNullOrEmpty(txt_fourthAnswer.Text)
+                   && !CheckDuplicates())
             {
                 if (btn_save.Text == "Update")
                 {
@@ -192,8 +193,21 @@ namespace QuizApp.UI.Forms
             }
             else
             {
-                MessageBox.Show("Please fill in all fields.", "Error");
+                MessageBox.Show("Please fill in all the fields without duplicating the answer.", "Error");
             }
+        }
+
+        private bool CheckDuplicates()
+        {
+            bool duplicated = false;
+            string[] answer = { txt_correctAnswer.Text, txt_secondAnswer.Text, txt_thirdAnswer.Text, txt_fourthAnswer.Text };
+
+            if (answer.Length != answer.Distinct().Count())
+            {
+                duplicated = true;
+            }
+
+            return duplicated;
         }
     }
 }
