@@ -147,6 +147,20 @@ namespace QuizApp.UI.Forms
             {
                 var test = (TestModel)lv_testList.SelectedItems[0].Tag;
                 TestService testService = new TestService();
+                QuestionService questionService = new QuestionService();
+                var questionList = questionService.GetAll().Where(x => x.TestID == test.TestID).ToList();
+                AnswerService answerService = new AnswerService();
+
+                foreach (var question in questionList)
+                {
+                    var answerList = answerService.GetAll().Where(x => x.QuestionID == question.QuestionID).ToList();
+                    foreach (var answer in answerList)
+                    {
+                        answerService.Delete(answer.AnswerID);
+                    }
+
+                    questionService.Delete(question.QuestionID);
+                }
                 testService.Delete(test.TestID);
                 MessageBox.Show("The Test was deleted", "Success");
                 DisplayAllTest();
@@ -171,6 +185,27 @@ namespace QuizApp.UI.Forms
                     var test = (TestModel)lv_testList.SelectedItems[0].Tag;
                     QuestionListForm questionListForm = new QuestionListForm(test.TestID, test.TestName); 
                     questionListForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a test", "Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lv_testList.SelectedItems.Count > 0)
+                {
+                    var test = (TestModel)lv_testList.SelectedItems[0].Tag;
+                    QuizForm quizForm = new QuizForm(test);
+                    quizForm.ShowDialog();
                 }
                 else
                 {

@@ -83,6 +83,12 @@
     <Compile Include="Forms\QuestionListForm.Designer.cs">
       <DependentUpon>QuestionListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\QuizForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QuizForm.Designer.cs">
+      <DependentUpon>QuizForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\QuestionListForm.resx">
       <DependentUpon>QuestionListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QuizForm.resx">
+      <DependentUpon>QuizForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>

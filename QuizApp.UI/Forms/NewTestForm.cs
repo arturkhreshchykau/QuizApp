@@ -248,7 +248,17 @@ namespace QuizApp.UI.Forms
                 }
                 else
                 {
-                    testModel.Timer = Convert.ToInt32(txt_timer.Text);
+                    int timer;
+                    if (int.TryParse(txt_timer.Text, out timer))
+                    {
+                        testModel.Timer = timer;
+                    }
+                    else
+                    {
+                        MessageBox.Show("The Timer is a number only field", "Error");
+                        txt_timer.Text = string.Empty;
+                        return;
+                    }
                 }
                 
                 TestService testService = new TestService();
