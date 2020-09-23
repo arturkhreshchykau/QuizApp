@@ -36,7 +36,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
-            this.lbl_hour = new System.Windows.Forms.Label();
             this.lbl_minute = new System.Windows.Forms.Label();
             this.lbl_second = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -46,6 +45,8 @@
             this.rbn_thirdAnswer = new System.Windows.Forms.RadioButton();
             this.rbn_fourthAnswer = new System.Windows.Forms.RadioButton();
             this.txt_answer = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -114,35 +115,25 @@
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
-            // lbl_hour
-            // 
-            this.lbl_hour.AutoSize = true;
-            this.lbl_hour.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_hour.Location = new System.Drawing.Point(550, 22);
-            this.lbl_hour.Name = "lbl_hour";
-            this.lbl_hour.Size = new System.Drawing.Size(31, 17);
-            this.lbl_hour.TabIndex = 16;
-            this.lbl_hour.Text = "00:";
-            // 
             // lbl_minute
             // 
             this.lbl_minute.AutoSize = true;
             this.lbl_minute.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_minute.Location = new System.Drawing.Point(577, 22);
+            this.lbl_minute.Location = new System.Drawing.Point(543, 18);
             this.lbl_minute.Name = "lbl_minute";
-            this.lbl_minute.Size = new System.Drawing.Size(31, 17);
+            this.lbl_minute.Size = new System.Drawing.Size(17, 17);
             this.lbl_minute.TabIndex = 17;
-            this.lbl_minute.Text = "00:";
+            this.lbl_minute.Text = "0";
             // 
             // lbl_second
             // 
             this.lbl_second.AutoSize = true;
             this.lbl_second.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_second.Location = new System.Drawing.Point(605, 22);
+            this.lbl_second.Location = new System.Drawing.Point(591, 18);
             this.lbl_second.Name = "lbl_second";
-            this.lbl_second.Size = new System.Drawing.Size(26, 17);
+            this.lbl_second.Size = new System.Drawing.Size(17, 17);
             this.lbl_second.TabIndex = 18;
-            this.lbl_second.Text = "00";
+            this.lbl_second.Text = "0";
             // 
             // timer1
             // 
@@ -207,11 +198,33 @@
             this.txt_answer.TabIndex = 25;
             this.txt_answer.Visible = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(566, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 15);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "min";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(614, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(26, 15);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "sec";
+            // 
             // QuizForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 466);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_answer);
             this.Controls.Add(this.rbn_fourthAnswer);
             this.Controls.Add(this.rbn_thirdAnswer);
@@ -220,7 +233,6 @@
             this.Controls.Add(this.txt_questionName);
             this.Controls.Add(this.lbl_second);
             this.Controls.Add(this.lbl_minute);
-            this.Controls.Add(this.lbl_hour);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.btn_next);
             this.Controls.Add(this.label6);
@@ -246,7 +258,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn_next;
         private System.Windows.Forms.Button btn_exit;
-        private System.Windows.Forms.Label lbl_hour;
         private System.Windows.Forms.Label lbl_minute;
         private System.Windows.Forms.Label lbl_second;
         private System.Windows.Forms.Timer timer1;
@@ -256,5 +267,7 @@
         private System.Windows.Forms.RadioButton rbn_thirdAnswer;
         private System.Windows.Forms.RadioButton rbn_fourthAnswer;
         private System.Windows.Forms.TextBox txt_answer;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -255,7 +255,7 @@ namespace QuizApp.UI.Forms
                     }
                     else
                     {
-                        MessageBox.Show("The Timer is a number only field", "Error");
+                        MessageBox.Show("The Timer is a integer only field", "Error");
                         txt_timer.Text = string.Empty;
                         return;
                     }

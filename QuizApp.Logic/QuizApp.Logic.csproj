@@ -58,6 +58,7 @@
     <Compile Include="Services\Implementations\AnswerService.cs" />
     <Compile Include="Services\Implementations\CategoryService.cs" />
     <Compile Include="Services\Implementations\QuestionService.cs" />
+    <Compile Include="Services\Implementations\StatisticService.cs" />
     <Compile Include="Services\Implementations\TestService.cs" />
     <Compile Include="Services\Implementations\UserService.cs" />
     <Compile Include="Services\Interfaces\IAnswerService.cs" />

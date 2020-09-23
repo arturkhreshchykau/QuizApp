@@ -204,8 +204,17 @@ namespace QuizApp.UI.Forms
                 if (lv_testList.SelectedItems.Count > 0)
                 {
                     var test = (TestModel)lv_testList.SelectedItems[0].Tag;
-                    QuizForm quizForm = new QuizForm(test);
-                    quizForm.ShowDialog();
+                    QuestionService questionService = new QuestionService();
+                    var questionList = questionService.GetAll().Where(x => x.TestID == test.TestID).ToList();
+                    if (questionList.Count == 0)
+                    {
+                        MessageBox.Show("There are no questions in this test.", "Error");
+                    }
+                    else
+                    {
+                        QuizForm quizForm = new QuizForm(test, questionList);
+                        quizForm.ShowDialog();
+                    }
                 }
                 else
                 {

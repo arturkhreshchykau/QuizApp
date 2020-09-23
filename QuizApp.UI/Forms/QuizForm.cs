@@ -14,15 +14,15 @@ namespace QuizApp.UI.Forms
 {
     public partial class QuizForm : Form
     {
-        private readonly int testID;
-        private readonly int minutes;
-        private readonly List<QuestionModel> questionList;
+        private readonly List<QuestionModel> _questionList;
         private readonly bool isOpen;
         private int сorrect = 0;
         private string correctAnswer;
         private int quantity;
+        private int seconds = 59;
+        private readonly int testID;
 
-        public QuizForm(TestModel testModel)
+        public QuizForm(TestModel testModel, List<QuestionModel> questionList)
         {
             InitializeComponent();
 
@@ -30,29 +30,28 @@ namespace QuizApp.UI.Forms
             label1.Text = "Test: " + testModel.TestName;
             if (testModel.Timer == null)
             {
-                lbl_hour.Visible = false;
                 lbl_minute.Visible = false;
                 lbl_second.Visible = false;
             }
             else
             {
-                minutes = (int)testModel.Timer;
+                lbl_minute.Text = ((int)testModel.Timer - 1).ToString();
+                lbl_second.Text = "59";
             }
 
+            timer1.Start();
+
+            _questionList = questionList;
             isOpen = testModel.isLiveCheck;
-            
-            //timer1.Start();
-            QuestionService questionService = new QuestionService();
-            questionList = questionService.GetAll().Where(x => x.TestID == testID).ToList();
-            quantity = questionList.Count;
-            DisplayQuestion();
+            quantity = _questionList.Count;
+            DisplayQuestion();            
         }
 
         private void DisplayQuestion()
         {
             Random rnd = new Random();
-            var index = rnd.Next(questionList.Count);
-            QuestionModel question = questionList[index];
+            var index = rnd.Next(_questionList.Count);
+            QuestionModel question = _questionList[index];
             txt_questionName.Text = "Question: " + question.QuestionName;
             AnswerService answerService = new AnswerService();
             var allAnswer = answerService.GetAll();
@@ -87,7 +86,7 @@ namespace QuizApp.UI.Forms
                 DisplayAnswer(answerList);
             }
 
-            questionList.Remove(question);
+            _questionList.Remove(question);
         }
 
         private void DisplayAnswer(List<AnswerModel> answerList)
@@ -112,40 +111,25 @@ namespace QuizApp.UI.Forms
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int seconds = 60;
-            int hours, min;
-            if (minutes > 60)
+            int min = Convert.ToInt32(lbl_minute.Text);
+
+            seconds--;
+
+            if (seconds == -1)
             {
-                double intHour = minutes / 60;
-                hours = (int)Math.Round(intHour);
-                min = minutes - hours * 60;
-            }
-            else
-            {
-                min = minutes;
-                hours = 0;
+                min--;
+                seconds = 59;
             }
 
-            lbl_hour.Text = hours.ToString();
             lbl_minute.Text = min.ToString();
             lbl_second.Text = seconds.ToString();
 
-            seconds--;
-            if (seconds == 0)
-            {
-                min--;
-                seconds = 60;
-            }
-
-            if (min == 0)
-            {
-                hours--;
-            }
-
-            if (seconds == 0 && min == 0 && hours == 0)
+            if (seconds == 0 && min == 0)
             {
                 timer1.Stop();
-                MessageBox.Show("Time is up.");
+                int percent = (int)Math.Round((double)(100 * сorrect) / quantity);
+                MessageBox.Show("There is(are) " + сorrect.ToString() + " correct answer(s) from " + quantity + " questions. It`s a " + percent + "%", "Time is up.");
+                this.Close();
             }
         }
 
@@ -177,9 +161,24 @@ namespace QuizApp.UI.Forms
                     MessageBox.Show(answer, title);
                 }
 
-                if (questionList.Count == 0)
+                if (_questionList.Count == 0)
                 {
-                    //* TODO: add method for the statistic
+                    timer1.Stop();
+
+
+                    //UserService userService = new UserService();
+                    //AuthenticationForm authenticationForm = new AuthenticationForm();
+                    //StartForm startForm = new StartForm(Name);
+
+                    ////int userID = userService.GetAll().Where(x => x.Name == startForm..ToString()).Single().ID;
+                    //StatisticService statisticService = new StatisticService();
+                    //StatisticModel statisticModel = new StatisticModel()
+                    //{
+                    //    //UserID = userID,
+                    //    //TestID = testID,
+                    //    //CorrectAnswer = сorrect
+                    //};
+                    //statisticService.Add(statisticModel);
 
                     int percent = (int)Math.Round((double)(100 * сorrect) / quantity);
                     MessageBox.Show("There is(are) " + сorrect.ToString() + " correct answer(s) from " + quantity + " questions. It`s a " + percent + "%","The test is finished!");
