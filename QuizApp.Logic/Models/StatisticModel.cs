@@ -12,5 +12,6 @@ namespace QuizApp.Logic.Models
         public int UserID { get; set; }
         public int TestID { get; set; }
         public int CorrectAnswer { get; set; }
+        public DateTime Passed { get; set; }
     }
 }

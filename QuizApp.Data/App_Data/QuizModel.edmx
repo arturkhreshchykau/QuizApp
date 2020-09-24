@@ -39,6 +39,7 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="TestID" Type="int" Nullable="false" />
           <Property Name="CorrectAnswer" Type="int" Nullable="false" />
+          <Property Name="Passed" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -59,6 +60,7 @@
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Timer" Type="int" />
           <Property Name="isLiveCheck" Type="bit" Nullable="false" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -252,6 +254,7 @@
           <Property Name="CorrectAnswer" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Test" Relationship="QuizDBModel.FK_Statistics_Tests" FromRole="Statistic" ToRole="Test" />
           <NavigationProperty Name="User" Relationship="QuizDBModel.FK_Statistics_Users" FromRole="Statistic" ToRole="User" />
+          <Property Name="Passed" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -275,6 +278,7 @@
           <NavigationProperty Name="Category" Relationship="QuizDBModel.FK_Tests_Categories" FromRole="Test" ToRole="Category" />
           <NavigationProperty Name="Questions" Relationship="QuizDBModel.FK_Questions_Tests" FromRole="Test" ToRole="Question" />
           <NavigationProperty Name="Statistics" Relationship="QuizDBModel.FK_Statistics_Tests" FromRole="Test" ToRole="Statistic" />
+          <Property Name="OwnerID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -395,6 +399,7 @@
           <EntitySetMapping Name="Statistics">
             <EntityTypeMapping TypeName="QuizDBModel.Statistic">
               <MappingFragment StoreEntitySet="Statistics">
+                <ScalarProperty Name="Passed" ColumnName="Passed" />
                 <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
                 <ScalarProperty Name="TestID" ColumnName="TestID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -416,6 +421,7 @@
           <EntitySetMapping Name="Tests">
             <EntityTypeMapping TypeName="QuizDBModel.Test">
               <MappingFragment StoreEntitySet="Tests">
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
                 <ScalarProperty Name="isLiveCheck" ColumnName="isLiveCheck" />
                 <ScalarProperty Name="Timer" ColumnName="Timer" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />

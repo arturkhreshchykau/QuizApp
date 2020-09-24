@@ -29,6 +29,7 @@ namespace QuizApp.Logic.Services.Implementations
                     CategoryID = item.CategoryID,
                     Timer = item.Timer,
                     isLiveCheck = item.isLiveCheck,
+                    OwnerID = item.OwnerID
                 };
 
                 _testRepository.Add(test);
@@ -72,6 +73,7 @@ namespace QuizApp.Logic.Services.Implementations
                     CategoryID = test.CategoryID,
                     Timer = test.Timer,
                     isLiveCheck = test.isLiveCheck,
+                    OwnerID = test.OwnerID
                 };
             }
         }
@@ -85,6 +87,7 @@ namespace QuizApp.Logic.Services.Implementations
                     CategoryID = test.CategoryID,
                     Timer = test.Timer,
                     isLiveCheck = test.isLiveCheck,
+                    OwnerID = test.OwnerID
                 }).AsEnumerable();
         }
 
@@ -99,7 +102,8 @@ namespace QuizApp.Logic.Services.Implementations
                     TestName = item.TestName,
                     CategoryID = item.CategoryID,
                     Timer = item.Timer,
-                    isLiveCheck = item.isLiveCheck
+                    isLiveCheck = item.isLiveCheck,
+                    OwnerID = item.OwnerID
                 };
 
                 _testRepository.Update(test);

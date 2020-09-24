@@ -40,6 +40,7 @@
             this.ch_isLiveCheck = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_close = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btn_statistic = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -149,11 +150,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btn_statistic
+            // 
+            this.btn_statistic.Location = new System.Drawing.Point(470, 363);
+            this.btn_statistic.Name = "btn_statistic";
+            this.btn_statistic.Size = new System.Drawing.Size(103, 37);
+            this.btn_statistic.TabIndex = 9;
+            this.btn_statistic.Text = "Statistic";
+            this.btn_statistic.UseVisualStyleBackColor = true;
+            this.btn_statistic.Click += new System.EventHandler(this.btn_statistic_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 508);
+            this.Controls.Add(this.btn_statistic);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.lv_testList);
@@ -185,5 +197,6 @@
         private System.Windows.Forms.ColumnHeader ch_isLiveCheck;
         private System.Windows.Forms.Button btn_close;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_statistic;
     }
 }

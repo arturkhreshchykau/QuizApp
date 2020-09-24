@@ -14,17 +14,19 @@ namespace QuizApp.UI.Forms
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private readonly int UserID;
+        public MainForm(int UserId)
         {
             InitializeComponent();
             DisplayAllTest();
+            this.UserID = UserId;
         }
 
         private void txt_addNew_Click(object sender, EventArgs e)
         {
             try
             {
-                NewTestForm newTest = new NewTestForm();
+                NewTestForm newTest = new NewTestForm(UserID);
                 newTest.ShowDialog();
                 DisplayAllTest();
             }
@@ -41,7 +43,7 @@ namespace QuizApp.UI.Forms
                 if (lv_testList.SelectedItems.Count > 0)
                 {
                     CategoryService categoryService = new CategoryService();
-                    NewTestForm testForm = new NewTestForm();
+                    NewTestForm testForm = new NewTestForm(UserID);
                     var test = (TestModel)lv_testList.SelectedItems[0].Tag;
                     testForm.TestID = test.TestID;
 
@@ -212,7 +214,7 @@ namespace QuizApp.UI.Forms
                     }
                     else
                     {
-                        QuizForm quizForm = new QuizForm(test, questionList);
+                        QuizForm quizForm = new QuizForm(test, questionList, UserID);
                         quizForm.ShowDialog();
                     }
                 }
@@ -220,6 +222,19 @@ namespace QuizApp.UI.Forms
                 {
                     MessageBox.Show("Please select a test", "Error");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
+
+        private void btn_statistic_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StatisticForm statisticForm = new StatisticForm();
+                statisticForm.ShowDialog();
             }
             catch (Exception ex)
             {

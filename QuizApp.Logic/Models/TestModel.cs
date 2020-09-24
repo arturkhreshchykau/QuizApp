@@ -13,5 +13,6 @@ namespace QuizApp.Logic.Models
         public int CategoryID { get; set; }
         public int? Timer { get; set; }
         public bool isLiveCheck { get; set; }
+        public int OwnerID { get; set; }
     }
 }

@@ -18,12 +18,14 @@ namespace QuizApp.UI.Forms
         private List<CategoryModel> categoryList;
         private List<CategoryModel> subCategoryList;
         private List<CategoryModel> topicList;
+        private readonly int OwnerID;
         public int TestID { get; set; }
 
-        public NewTestForm()
+        public NewTestForm(int UserID)
         {
             InitializeComponent();
             DisplayCategory();
+            OwnerID = UserID;
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -240,6 +242,7 @@ namespace QuizApp.UI.Forms
                     TestName = txt_testName.Text,
                     CategoryID = categoryID,
                     isLiveCheck = rbtn_no.Checked ? true : false,
+                    OwnerID = OwnerID
                 };
 
                 if (txt_timer.Text == string.Empty || txt_timer.Text == "0")

@@ -45,8 +45,8 @@
             this.rbn_thirdAnswer = new System.Windows.Forms.RadioButton();
             this.rbn_fourthAnswer = new System.Windows.Forms.RadioButton();
             this.txt_answer = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lbl_min = new System.Windows.Forms.Label();
+            this.lbl_sec = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -198,33 +198,33 @@
             this.txt_answer.TabIndex = 25;
             this.txt_answer.Visible = false;
             // 
-            // label2
+            // lbl_min
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(566, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 15);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "min";
+            this.lbl_min.AutoSize = true;
+            this.lbl_min.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_min.Location = new System.Drawing.Point(566, 18);
+            this.lbl_min.Name = "lbl_min";
+            this.lbl_min.Size = new System.Drawing.Size(28, 15);
+            this.lbl_min.TabIndex = 26;
+            this.lbl_min.Text = "min";
             // 
-            // label7
+            // lbl_sec
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(614, 18);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(26, 15);
-            this.label7.TabIndex = 27;
-            this.label7.Text = "sec";
+            this.lbl_sec.AutoSize = true;
+            this.lbl_sec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_sec.Location = new System.Drawing.Point(614, 18);
+            this.lbl_sec.Name = "lbl_sec";
+            this.lbl_sec.Size = new System.Drawing.Size(26, 15);
+            this.lbl_sec.TabIndex = 27;
+            this.lbl_sec.Text = "sec";
             // 
             // QuizForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 466);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_sec);
+            this.Controls.Add(this.lbl_min);
             this.Controls.Add(this.txt_answer);
             this.Controls.Add(this.rbn_fourthAnswer);
             this.Controls.Add(this.rbn_thirdAnswer);
@@ -267,7 +267,7 @@
         private System.Windows.Forms.RadioButton rbn_thirdAnswer;
         private System.Windows.Forms.RadioButton rbn_fourthAnswer;
         private System.Windows.Forms.TextBox txt_answer;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbl_min;
+        private System.Windows.Forms.Label lbl_sec;
     }
 }

@@ -11,8 +11,8 @@ namespace QuizApp.Data.Repositories.Implementations
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        QuizDBEntities _context;
-        DbSet<TEntity> _dbSet;
+        private readonly QuizDBEntities _context;
+        private readonly DbSet<TEntity> _dbSet;
 
         public GenericRepository()
         {

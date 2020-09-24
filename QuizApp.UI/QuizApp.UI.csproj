@@ -101,6 +101,18 @@
     <Compile Include="Forms\NewAccountForm.Designer.cs">
       <DependentUpon>NewAccountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StatisticForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StatisticForm.Designer.cs">
+      <DependentUpon>StatisticForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TestResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TestResultForm.Designer.cs">
+      <DependentUpon>TestResultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\NewQuestionForm.resx">
@@ -126,6 +138,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewAccountForm.resx">
       <DependentUpon>NewAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StatisticForm.resx">
+      <DependentUpon>StatisticForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TestResultForm.resx">
+      <DependentUpon>TestResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

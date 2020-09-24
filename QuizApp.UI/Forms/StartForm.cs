@@ -1,4 +1,5 @@
 ﻿using QuizApp.Logic;
+using QuizApp.Logic.Services.Implementations;
 using QuizApp.UI.Forms;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,13 @@ namespace QuizApp.UI
 {
     public partial class StartForm : Form
     {
+        private readonly int UserID;
         public StartForm(string Name)
         {
             InitializeComponent();
             lbl_welcome.Text += " " + Name + " !!!";
+            UserService userServicer = new UserService();
+            UserID = userServicer.GetAll().Where(x => x.Name == Name).Single().ID;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -25,7 +29,7 @@ namespace QuizApp.UI
             try
             {
                 this.Hide();
-                MainForm mainForm = new MainForm();
+                MainForm mainForm = new MainForm(UserID);
                 mainForm.Closed += (s, args) => this.Close();
                 mainForm.Show();
             }

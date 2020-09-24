@@ -21,17 +21,21 @@ namespace QuizApp.UI.Forms
         private int quantity;
         private int seconds = 59;
         private readonly int testID;
+        private readonly int userID;
 
-        public QuizForm(TestModel testModel, List<QuestionModel> questionList)
+        public QuizForm(TestModel testModel, List<QuestionModel> questionList, int userId)
         {
             InitializeComponent();
 
-            testID = testModel.TestID;
+            this.userID = userId;
+            this.testID = testModel.TestID;
             label1.Text = "Test: " + testModel.TestName;
             if (testModel.Timer == null)
             {
                 lbl_minute.Visible = false;
                 lbl_second.Visible = false;
+                lbl_min.Visible = false;
+                lbl_sec.Visible = false;
             }
             else
             {
@@ -135,6 +139,7 @@ namespace QuizApp.UI.Forms
 
         private void btn_exit_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
             this.Close();
         }
 
@@ -165,23 +170,16 @@ namespace QuizApp.UI.Forms
                 {
                     timer1.Stop();
 
+                    StatisticService statisticService = new StatisticService();
+                    StatisticModel statisticModel = new StatisticModel()
+                    {
+                        UserID = userID,
+                        TestID = testID,
+                        CorrectAnswer = сorrect,
+                    };
+                    statisticService.Add(statisticModel);
 
-                    //UserService userService = new UserService();
-                    //AuthenticationForm authenticationForm = new AuthenticationForm();
-                    //StartForm startForm = new StartForm(Name);
-
-                    ////int userID = userService.GetAll().Where(x => x.Name == startForm..ToString()).Single().ID;
-                    //StatisticService statisticService = new StatisticService();
-                    //StatisticModel statisticModel = new StatisticModel()
-                    //{
-                    //    //UserID = userID,
-                    //    //TestID = testID,
-                    //    //CorrectAnswer = сorrect
-                    //};
-                    //statisticService.Add(statisticModel);
-
-                    int percent = (int)Math.Round((double)(100 * сorrect) / quantity);
-                    MessageBox.Show("There is(are) " + сorrect.ToString() + " correct answer(s) from " + quantity + " questions. It`s a " + percent + "%","The test is finished!");
+                    DisplayResult();
                     Close();
                 }
                 else
@@ -192,6 +190,27 @@ namespace QuizApp.UI.Forms
             else
             {
                 MessageBox.Show("Please select the answer!");
+            }
+        }
+
+        private void DisplayResult()
+        {
+            try
+            {
+                int percent = (int)Math.Round((double)(100 * сorrect) / quantity);
+                if (isOpen)
+                {
+                    MessageBox.Show("There is(are) " + сorrect.ToString() + " correct answer(s) from " + quantity + " questions. It`s a " + percent + "%", "The test is finished!");
+                }
+                else
+                {
+                    TestResultForm testResult = new TestResultForm(testID, userID);
+                    testResult.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
         }
 
