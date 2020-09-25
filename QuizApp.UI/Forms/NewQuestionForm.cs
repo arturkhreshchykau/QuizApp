@@ -117,71 +117,18 @@ namespace QuizApp.UI.Forms
 
         private void SaveUpdateClosedQuestion(QuestionModel questionModel, QuestionService questionService, AnswerModel answerModel, AnswerService answerService)
         {
-            if (!string.IsNullOrEmpty(txt_question.Text)
-                   && !string.IsNullOrEmpty(txt_correctAnswer.Text) && !string.IsNullOrEmpty(txt_secondAnswer.Text)
-                   && !string.IsNullOrEmpty(txt_thirdAnswer.Text) && !string.IsNullOrEmpty(txt_fourthAnswer.Text)
-                   && !CheckDuplicates())
+            if (Validation() && !CheckDuplicates())
             {
                 if (btn_save.Text == "Update")
                 {
-                    //* updating a question
-                    questionModel.isOpen = false;
-                    questionModel.QuestionID = questionID;
-                    questionService.Update(questionModel);
-
-                    //* updating answers
-                    var allAnswer = answerService.GetAll().Where(x => x.QuestionID == questionID).ToList();
-                    int index = 0;
-                    foreach (var answer in allAnswer)
-                    {
-                        if (answer.isCorrect)
-                        {
-                            answerModel.isCorrect = true;
-                            answerModel.QuestionID = questionID;
-                            answerModel.AnswerID = answer.AnswerID;
-                            answerModel.AnswerText = txt_correctAnswer.Text;
-                            answerService.Update(answerModel);
-                        }
-                        else
-                        {
-                            string[] answerText = new string[] { txt_secondAnswer.Text, txt_thirdAnswer.Text, txt_fourthAnswer.Text };
-                            answerModel.AnswerID = answer.AnswerID;
-                            answerModel.isCorrect = false;
-                            answerModel.QuestionID = questionID;
-                            answerModel.AnswerText = answerText[index];
-                            answerService.Update(answerModel);
-                            index++;
-                        }
-                    }
+                    UpdateQuestion(questionModel, questionService, answerModel, answerService);
 
                     MessageBox.Show("Updated successfully!", "Done");
                     this.Close();
                 }
                 else
                 {
-                    //* adding a question
-                    questionModel.isOpen = false;
-                    questionService.Add(questionModel);
-
-                    //* adding answers
-                    answerModel.QuestionID = questionService.GetAll().OrderByDescending(x => x.QuestionID).First().QuestionID;
-                    string[] answerText = new string[] { txt_correctAnswer.Text, txt_secondAnswer.Text, txt_thirdAnswer.Text, txt_fourthAnswer.Text };
-
-                    foreach (var item in answerText)
-                    {
-                        if (item == txt_correctAnswer.Text)
-                        {
-                            answerModel.isCorrect = true;
-                            answerModel.AnswerText = item;
-                            answerService.Add(answerModel);
-                        }
-                        else
-                        {
-                            answerModel.isCorrect = false;
-                            answerModel.AnswerText = item;
-                            answerService.Add(answerModel);
-                        }
-                    }
+                    AddNewQuestion(questionModel, questionService, answerModel, answerService);
 
                     MessageBox.Show("Added successfully!", "Done");
                     txt_question.Text = string.Empty;
@@ -195,6 +142,73 @@ namespace QuizApp.UI.Forms
             {
                 MessageBox.Show("Please fill in all the fields without duplicating the answer.", "Error");
             }
+        }
+
+        private void AddNewQuestion(QuestionModel questionModel, QuestionService questionService, AnswerModel answerModel, AnswerService answerService)
+        {
+            //* adding a question
+            questionModel.isOpen = false;
+            questionService.Add(questionModel);
+
+            //* adding answers
+            answerModel.QuestionID = questionService.GetAll().OrderByDescending(x => x.QuestionID).First().QuestionID;
+            string[] answerText = new string[] { txt_correctAnswer.Text, txt_secondAnswer.Text, txt_thirdAnswer.Text, txt_fourthAnswer.Text };
+
+            foreach (var item in answerText)
+            {
+                if (item == txt_correctAnswer.Text)
+                {
+                    answerModel.isCorrect = true;
+                    answerModel.AnswerText = item;
+                    answerService.Add(answerModel);
+                }
+                else
+                {
+                    answerModel.isCorrect = false;
+                    answerModel.AnswerText = item;
+                    answerService.Add(answerModel);
+                }
+            }
+        }
+
+        private void UpdateQuestion(QuestionModel questionModel, QuestionService questionService, AnswerModel answerModel, AnswerService answerService)
+        {
+            //* updating a question
+            questionModel.isOpen = false;
+            questionModel.QuestionID = questionID;
+            questionService.Update(questionModel);
+
+            //* updating answers
+            var allAnswer = answerService.GetAll().Where(x => x.QuestionID == questionID).ToList();
+            int index = 0;
+            foreach (var answer in allAnswer)
+            {
+                if (answer.isCorrect)
+                {
+                    answerModel.isCorrect = true;
+                    answerModel.QuestionID = questionID;
+                    answerModel.AnswerID = answer.AnswerID;
+                    answerModel.AnswerText = txt_correctAnswer.Text;
+                    answerService.Update(answerModel);
+                }
+                else
+                {
+                    string[] answerText = new string[] { txt_secondAnswer.Text, txt_thirdAnswer.Text, txt_fourthAnswer.Text };
+                    answerModel.AnswerID = answer.AnswerID;
+                    answerModel.isCorrect = false;
+                    answerModel.QuestionID = questionID;
+                    answerModel.AnswerText = answerText[index];
+                    answerService.Update(answerModel);
+                    index++;
+                }
+            }
+        }
+
+        private bool Validation()
+        {
+            return !string.IsNullOrEmpty(txt_question.Text)
+                   && !string.IsNullOrEmpty(txt_correctAnswer.Text) && !string.IsNullOrEmpty(txt_secondAnswer.Text)
+                   && !string.IsNullOrEmpty(txt_thirdAnswer.Text) && !string.IsNullOrEmpty(txt_fourthAnswer.Text);
         }
 
         private bool CheckDuplicates()

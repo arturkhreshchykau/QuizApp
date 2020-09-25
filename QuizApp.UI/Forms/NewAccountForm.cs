@@ -37,7 +37,7 @@ namespace QuizApp.UI
 
             UserService userService = new UserService();
                 
-            if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && !userService.Exist(userModel))
+            if (Validation() && !userService.Exist(userModel))
             {
                 userService.Add(userModel);
                 this.Close();
@@ -50,6 +50,11 @@ namespace QuizApp.UI
                 txt_name.Text = string.Empty;
                 txt_password.Text = string.Empty;
             }
+        }
+
+        private bool Validation()
+        {
+            return (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text));
         }
     }
 }

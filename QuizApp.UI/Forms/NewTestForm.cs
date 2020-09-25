@@ -223,19 +223,7 @@ namespace QuizApp.UI.Forms
         {
             if(!string.IsNullOrEmpty(txt_testName.Text) && cbo_category.SelectedIndex != -1)
             {
-                int categoryID;
-                if (cbo_topic.SelectedValue != null)
-                {
-                    categoryID = Convert.ToInt32(cbo_topic.SelectedValue);
-                }
-                else if (cbo_subcategory.SelectedValue != null)
-                {
-                    categoryID = Convert.ToInt32(cbo_subcategory.SelectedValue);
-                }
-                else
-                {
-                    categoryID = Convert.ToInt32(cbo_category.SelectedValue);
-                }
+                GetCategoryID(out int categoryID);
 
                 TestModel testModel = new TestModel()
                 {
@@ -245,24 +233,8 @@ namespace QuizApp.UI.Forms
                     OwnerID = OwnerID
                 };
 
-                if (txt_timer.Text == string.Empty || txt_timer.Text == "0")
-                {
-                    testModel.Timer = null;
-                }
-                else
-                {
-                    int timer;
-                    if (int.TryParse(txt_timer.Text, out timer))
-                    {
-                        testModel.Timer = timer;
-                    }
-                    else
-                    {
-                        MessageBox.Show("The Timer is a integer only field", "Error");
-                        txt_timer.Text = string.Empty;
-                        return;
-                    }
-                }
+                if (!GetTimeValue(testModel))
+                    return;
                 
                 TestService testService = new TestService();
                 if (btn_createTest.Text == "Update")
@@ -283,6 +255,46 @@ namespace QuizApp.UI.Forms
             else
             {
                 MessageBox.Show("Please name the test and select at least a category.", "Error");
+            }
+        }
+
+        private bool GetTimeValue(TestModel testModel)
+        {
+            bool value = true;
+            if (txt_timer.Text == string.Empty || txt_timer.Text == "0")
+            {
+                testModel.Timer = null;
+            }
+            else
+            {
+                if (int.TryParse(txt_timer.Text, out int timer))
+                {
+                    testModel.Timer = timer;
+                }
+                else
+                {
+                    MessageBox.Show("The Timer is a integer only field", "Error");
+                    txt_timer.Text = string.Empty;
+                    value = false;
+                }
+            }
+
+            return value;
+        }
+
+        private void GetCategoryID(out int categoryID)
+        {
+            if (cbo_topic.SelectedValue != null)
+            {
+                categoryID = Convert.ToInt32(cbo_topic.SelectedValue);
+            }
+            else if (cbo_subcategory.SelectedValue != null)
+            {
+                categoryID = Convert.ToInt32(cbo_subcategory.SelectedValue);
+            }
+            else
+            {
+                categoryID = Convert.ToInt32(cbo_category.SelectedValue);
             }
         }
     }

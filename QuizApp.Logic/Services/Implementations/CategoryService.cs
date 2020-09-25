@@ -102,7 +102,7 @@ namespace QuizApp.Logic.Services.Implementations
         public bool Update(CategoryModel item)
         {
             bool updated;
-            if (item != null || item.CategoryId < 0)
+            if (item != null && item.CategoryId > 0)
             {
                 Category category = new Category()
                 {

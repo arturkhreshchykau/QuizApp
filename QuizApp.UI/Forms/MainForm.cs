@@ -50,45 +50,20 @@ namespace QuizApp.UI.Forms
                     var allCategory = categoryService.GetAll();
                     testForm.txt_testName.Text = test.TestName;
                     testForm.txt_timer.Text = test.Timer.ToString();
-                    if (test.isLiveCheck)
-                    {
-                        testForm.rbtn_no.Checked = true;
-                    }
-                    else
-                    {
-                        testForm.rbtn_yes.Checked = true;
-                    }
-
-                    testForm.btn_createTest.Text = "Update";
 
                     CategoryModel topic = allCategory.Where(x => x.CategoryId == test.CategoryID).Single();
                     CategoryModel subCategory = allCategory.Where(x => x.CategoryId == topic.ParentCategoryId).SingleOrDefault();
-                    categoryService.GetSubCategories(topic.CategoryId);
 
                     string categoryName = string.Empty;
                     if (subCategory != null)
                     {
-                        categoryService.GetSubCategories(subCategory.CategoryId);
                         CategoryModel category = allCategory.Where(x => x.CategoryId == subCategory.ParentCategoryId).SingleOrDefault();
                         categoryName = category != null ? category.CategoryName : string.Empty;
                     }
 
-                    foreach (var item in new string[] { categoryName, subCategory.CategoryName, topic.CategoryName })
-                    {
-                        if (testForm.cbo_category.FindStringExact(item) != -1)
-                        {
-                            testForm.cbo_category.SelectedIndex = testForm.cbo_category.FindStringExact(item);
-                        }
-                        else if (testForm.cbo_subcategory.FindStringExact(item) != -1)
-                        {
-                            testForm.cbo_subcategory.SelectedIndex = testForm.cbo_subcategory.FindStringExact(item);
-                        }
-                        else
-                        {
-                            testForm.cbo_topic.SelectedIndex = testForm.cbo_topic.FindStringExact(item);
-                        }
-                    }
-
+                    string[] categoryList = new string[] { categoryName, subCategory?.CategoryName, topic.CategoryName };
+                    DisplayCategory(testForm, categoryList, test.isLiveCheck);
+                    
                     testForm.ShowDialog();
                     DisplayAllTest();
                 }
@@ -101,6 +76,38 @@ namespace QuizApp.UI.Forms
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
+        }
+
+        private void DisplayCategory(NewTestForm testForm, string[] categoryList, bool isLiveCheck)
+        {
+            //* display category
+            foreach (var item in categoryList)
+            {
+                if (testForm.cbo_category.FindStringExact(item) != -1)
+                {
+                    testForm.cbo_category.SelectedIndex = testForm.cbo_category.FindStringExact(item);
+                }
+                else if (testForm.cbo_subcategory.FindStringExact(item) != -1)
+                {
+                    testForm.cbo_subcategory.SelectedIndex = testForm.cbo_subcategory.FindStringExact(item);
+                }
+                else
+                {
+                    testForm.cbo_topic.SelectedIndex = testForm.cbo_topic.FindStringExact(item);
+                }
+            };
+
+            //* display radiobuttons
+            if (isLiveCheck)
+            {
+                testForm.rbtn_no.Checked = true;
+            }
+            else
+            {
+                testForm.rbtn_yes.Checked = true;
+            }
+
+            testForm.btn_createTest.Text = "Update";
         }
 
         private void DisplayAllTest()

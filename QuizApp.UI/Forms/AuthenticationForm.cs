@@ -52,7 +52,7 @@ namespace QuizApp.UI
 
                 UserService userService = new UserService();
 
-                if (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text) && userService.LogIn(userModel))
+                if (Validation() && userService.LogIn(userModel))
                 {
                     this.Hide();
                     StartForm startForm = new StartForm(txt_name.Text);
@@ -70,6 +70,11 @@ namespace QuizApp.UI
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
+        }
+
+        private bool Validation()
+        {
+            return (!string.IsNullOrEmpty(txt_name.Text) && !string.IsNullOrEmpty(txt_password.Text));
         }
     }
 }
