@@ -1,5 +1,6 @@
 ﻿using QuizApp.Logic.Models;
 using QuizApp.Logic.Services.Implementations;
+using QuizApp.Logic.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,21 @@ namespace QuizApp.UI.Forms
     public partial class MainForm : Form
     {
         private readonly int UserID;
+        private readonly ICategoryService categoryService;
+        private readonly ITestService testService;
+        private readonly IQuestionService questionService;
+        private readonly IAnswerService answerService;
         public MainForm(int UserId)
         {
             InitializeComponent();
-            DisplayAllTest();
+
             this.UserID = UserId;
+            categoryService = new CategoryService();
+            testService = new TestService();
+            questionService = new QuestionService();
+            answerService = new AnswerService();
+
+            DisplayAllTest();
         }
 
         private void txt_addNew_Click(object sender, EventArgs e)
@@ -42,7 +53,6 @@ namespace QuizApp.UI.Forms
             {
                 if (lv_testList.SelectedItems.Count > 0)
                 {
-                    CategoryService categoryService = new CategoryService();
                     NewTestForm testForm = new NewTestForm(UserID);
                     var test = (TestModel)lv_testList.SelectedItems[0].Tag;
                     testForm.TestID = test.TestID;
@@ -115,8 +125,6 @@ namespace QuizApp.UI.Forms
             try
             {
                 lv_testList.Items.Clear();
-                TestService testService = new TestService();
-                CategoryService categoryService = new CategoryService();
                 var allCategory = categoryService.GetAll();
                 var tests = testService.GetAll().ToList();
                 foreach (var test in tests)
@@ -155,10 +163,7 @@ namespace QuizApp.UI.Forms
             if (lv_testList.SelectedItems.Count > 0)
             {
                 var test = (TestModel)lv_testList.SelectedItems[0].Tag;
-                TestService testService = new TestService();
-                QuestionService questionService = new QuestionService();
                 var questionList = questionService.GetAll().Where(x => x.TestID == test.TestID).ToList();
-                AnswerService answerService = new AnswerService();
 
                 foreach (var question in questionList)
                 {
@@ -213,7 +218,6 @@ namespace QuizApp.UI.Forms
                 if (lv_testList.SelectedItems.Count > 0)
                 {
                     var test = (TestModel)lv_testList.SelectedItems[0].Tag;
-                    QuestionService questionService = new QuestionService();
                     var questionList = questionService.GetAll().Where(x => x.TestID == test.TestID).ToList();
                     if (questionList.Count == 0)
                     {

@@ -1,5 +1,6 @@
 ﻿using QuizApp.Logic.Models;
 using QuizApp.Logic.Services.Implementations;
+using QuizApp.Logic.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,21 +16,22 @@ namespace QuizApp.UI.Forms
     public partial class QuestionListForm : Form
     {
         private readonly int testID;
-
+        private readonly IQuestionService questionService;
+        private readonly IAnswerService answerService;
         public QuestionListForm(int testID, string testName)
         {
             InitializeComponent();
             this.testID = testID;
             lbl_tableTitle.Text += " " + testName;
+            questionService = new QuestionService();
+            answerService = new AnswerService();
             DisplayQuestions();
         }
 
         private void DisplayQuestions()
         {
             lv_questionList.Items.Clear();
-            QuestionService questionService = new QuestionService();
             var questionsList = questionService.GetAll().Where(x => x.TestID == testID).ToList();
-            AnswerService answerService = new AnswerService();
             var answersList = answerService.GetAll();
             foreach (var question in questionsList)
             {
@@ -85,7 +87,6 @@ namespace QuizApp.UI.Forms
                     newQuestionForm.lbl_isOpen.Visible = false;
                     newQuestionForm.btn_save.Text = "Update";
 
-                    AnswerService answerService = new AnswerService();
                     var allAnswer = answerService.GetAll();
                     newQuestionForm.txt_correctAnswer.Text = allAnswer.Where(x => x.QuestionID == question.QuestionID && x.isCorrect == true).Single().AnswerText;
                     newQuestionForm.txt_question.Text = question.QuestionName;
@@ -122,8 +123,6 @@ namespace QuizApp.UI.Forms
         {
             if (lv_questionList.SelectedItems.Count > 0)
             {
-                QuestionService questionService = new QuestionService();
-                AnswerService answerService = new AnswerService();
                 var question = (QuestionModel)lv_questionList.SelectedItems[0].Tag;
                 var answers = answerService.GetAll().Where(x => x.QuestionID == question.QuestionID).ToList();
 
