@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Logic.Services.Implementations
 {
-    public class AnswerService : IService<AnswerModel>
+    public class AnswerService : IAnswerService
     {
         private readonly IGenericRepository<Answer> _answerRepository;
         public AnswerService()

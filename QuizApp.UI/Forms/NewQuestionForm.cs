@@ -1,5 +1,6 @@
 ﻿using QuizApp.Logic.Models;
 using QuizApp.Logic.Services.Implementations;
+using QuizApp.Logic.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +17,16 @@ namespace QuizApp.UI.Forms
     {
         private readonly int testID;
         private readonly int questionID;
+        private readonly IQuestionService questionService;
+        private readonly IAnswerService answerService;
+
         public NewQuestionForm(int testId, int questionId)
         {
             InitializeComponent();
             testID = testId;
             questionID = questionId;
+            questionService = new QuestionService();
+            answerService = new AnswerService();
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -47,16 +53,14 @@ namespace QuizApp.UI.Forms
             {
                 txt_secondAnswer.Visible = false;
                 txt_thirdAnswer.Visible = false;
-                txt_fourthAnswer.Visible = false;                
+                txt_fourthAnswer.Visible = false;
             }
         }
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            QuestionService questionService = new QuestionService();
             QuestionModel questionModel = new QuestionModel();
             AnswerModel answerModel = new AnswerModel();
-            AnswerService answerService = new AnswerService();
 
             questionModel.QuestionName = txt_question.Text;
             questionModel.TestID = testID;
@@ -71,7 +75,7 @@ namespace QuizApp.UI.Forms
             }
         }
 
-        private void SaveUpdateOpenQuestion(QuestionModel questionModel, QuestionService questionService, AnswerModel answerModel, AnswerService answerService)
+        private void SaveUpdateOpenQuestion(QuestionModel questionModel, IQuestionService questionService, AnswerModel answerModel, IAnswerService answerService)
         {
             if (!string.IsNullOrEmpty(txt_question.Text) && !string.IsNullOrEmpty(txt_correctAnswer.Text))
             {
@@ -115,7 +119,7 @@ namespace QuizApp.UI.Forms
             }
         }
 
-        private void SaveUpdateClosedQuestion(QuestionModel questionModel, QuestionService questionService, AnswerModel answerModel, AnswerService answerService)
+        private void SaveUpdateClosedQuestion(QuestionModel questionModel, IQuestionService questionService, AnswerModel answerModel, IAnswerService answerService)
         {
             if (Validation() && !CheckDuplicates())
             {
@@ -144,7 +148,7 @@ namespace QuizApp.UI.Forms
             }
         }
 
-        private void AddNewQuestion(QuestionModel questionModel, QuestionService questionService, AnswerModel answerModel, AnswerService answerService)
+        private void AddNewQuestion(QuestionModel questionModel, IQuestionService questionService, AnswerModel answerModel, IAnswerService answerService)
         {
             //* adding a question
             questionModel.isOpen = false;
@@ -171,7 +175,7 @@ namespace QuizApp.UI.Forms
             }
         }
 
-        private void UpdateQuestion(QuestionModel questionModel, QuestionService questionService, AnswerModel answerModel, AnswerService answerService)
+        private void UpdateQuestion(QuestionModel questionModel, IQuestionService questionService, AnswerModel answerModel, IAnswerService answerService)
         {
             //* updating a question
             questionModel.isOpen = false;
