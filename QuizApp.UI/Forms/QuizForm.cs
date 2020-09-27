@@ -176,6 +176,8 @@ namespace QuizApp.UI.Forms
                         UserID = userID,
                         TestID = testID,
                         CorrectAnswer = сorrect,
+                        QuestionsTotal = quantity,
+                        Passed = DateTime.Now
                     };
                     statisticService.Add(statisticModel);
 

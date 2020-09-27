@@ -18,6 +18,7 @@ namespace QuizApp.Logic.Services.Implementations
         {
             _statisticRepository = new GenericRepository<Statistic>();
         }
+
         public bool Add(StatisticModel item)
         {
             bool added;
@@ -29,7 +30,8 @@ namespace QuizApp.Logic.Services.Implementations
                     UserID = item.UserID,
                     TestID = item.TestID,
                     CorrectAnswer = item.CorrectAnswer,
-                    Passed = DateTime.Now
+                    Passed = item.Passed,
+                    QuestionsTotal = item.QuestionsTotal
                 };
 
                 _statisticRepository.Add(statistic);
@@ -65,14 +67,15 @@ namespace QuizApp.Logic.Services.Implementations
             }
             else
             {
-                var question = _statisticRepository.GetById(id);
+                var statistic = _statisticRepository.GetById(id);
                 return new StatisticModel()
                 {
-                    StatisticID = question.StatisticID,
-                    UserID = question.UserID,
-                    TestID = question.TestID,
-                    CorrectAnswer = question.CorrectAnswer,
-                    Passed = DateTime.Now
+                    StatisticID = statistic.StatisticID,
+                    UserID = statistic.UserID,
+                    TestID = statistic.TestID,
+                    CorrectAnswer = statistic.CorrectAnswer,
+                    Passed = statistic.Passed,
+                    QuestionsTotal = statistic.QuestionsTotal
                 };
             }
         }
@@ -86,7 +89,8 @@ namespace QuizApp.Logic.Services.Implementations
                        UserID = statistic.UserID,
                        TestID = statistic.TestID,
                        CorrectAnswer = statistic.CorrectAnswer,
-                       Passed = DateTime.Now
+                       Passed = statistic.Passed,
+                       QuestionsTotal = statistic.QuestionsTotal
                    }).AsEnumerable();
         }
 
@@ -101,7 +105,8 @@ namespace QuizApp.Logic.Services.Implementations
                     UserID = item.UserID,
                     TestID = item.TestID,
                     CorrectAnswer = item.CorrectAnswer,
-                    Passed = item.Passed
+                    Passed = item.Passed,
+                    QuestionsTotal = item.QuestionsTotal
                 };
 
                 _statisticRepository.Update(statistic);

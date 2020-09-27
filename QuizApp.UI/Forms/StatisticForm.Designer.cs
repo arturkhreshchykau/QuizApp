@@ -96,7 +96,7 @@
             this.lbl_userStatistic.TabIndex = 2;
             this.lbl_userStatistic.TabStop = true;
             this.lbl_userStatistic.Text = "User statistics";
-            this.lbl_userStatistic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkClicked);
+            this.lbl_userStatistic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_userStatistic_LinkClicked);
             // 
             // lbl_categoryStatistic
             // 
@@ -108,7 +108,7 @@
             this.lbl_categoryStatistic.TabIndex = 3;
             this.lbl_categoryStatistic.TabStop = true;
             this.lbl_categoryStatistic.Text = "Category statistics";
-            this.lbl_categoryStatistic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkClicked);
+            this.lbl_categoryStatistic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_categoryStatistic_LinkClicked);
             // 
             // btn_exit
             // 

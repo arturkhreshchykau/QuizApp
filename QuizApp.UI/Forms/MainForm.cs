@@ -51,17 +51,16 @@ namespace QuizApp.UI.Forms
         {
             try
             {
-                if (lv_testList.SelectedItems.Count > 0)
+                string text = string.Empty;
+                if (Access(out text, out TestModel selectedTest))
                 {
                     NewTestForm testForm = new NewTestForm(UserID);
-                    var test = (TestModel)lv_testList.SelectedItems[0].Tag;
-                    testForm.TestID = test.TestID;
+                    testForm.TestID = selectedTest.TestID;
+                    testForm.txt_testName.Text = selectedTest.TestName;
+                    testForm.txt_timer.Text = selectedTest.Timer.ToString();
 
                     var allCategory = categoryService.GetAll();
-                    testForm.txt_testName.Text = test.TestName;
-                    testForm.txt_timer.Text = test.Timer.ToString();
-
-                    CategoryModel topic = allCategory.Where(x => x.CategoryId == test.CategoryID).Single();
+                    CategoryModel topic = allCategory.Where(x => x.CategoryId == selectedTest.CategoryID).Single();
                     CategoryModel subCategory = allCategory.Where(x => x.CategoryId == topic.ParentCategoryId).SingleOrDefault();
 
                     string categoryName = string.Empty;
@@ -72,20 +71,50 @@ namespace QuizApp.UI.Forms
                     }
 
                     string[] categoryList = new string[] { categoryName, subCategory?.CategoryName, topic.CategoryName };
-                    DisplayCategory(testForm, categoryList, test.isLiveCheck);
-                    
+                    DisplayCategory(testForm, categoryList, selectedTest.isLiveCheck);
+
                     testForm.ShowDialog();
                     DisplayAllTest();
                 }
                 else
                 {
-                    MessageBox.Show("Please select a test", "Error");
+                    MessageBox.Show(text, "Error");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
+        }
+
+        private bool Access(out string text, out TestModel selectedTest)
+        {
+            bool access;
+            text = string.Empty;
+            if (lv_testList.SelectedItems.Count > 0)
+            {
+                selectedTest = (TestModel)lv_testList.SelectedItems[0].Tag;
+                int id = selectedTest.TestID;
+                var test = testService.GetAll().Where(x => x.TestID == id && x.OwnerID == UserID).SingleOrDefault();
+
+                if (test == null)
+                {
+                    access = false;
+                    text = "You don't have access to this.";
+                }
+                else
+                {
+                    access = true;
+                }
+            }
+            else
+            {
+                text = "Please select a test";
+                access = false;
+                selectedTest = null;
+            }
+            
+            return access;
         }
 
         private void DisplayCategory(NewTestForm testForm, string[] categoryList, bool isLiveCheck)
@@ -160,10 +189,10 @@ namespace QuizApp.UI.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (lv_testList.SelectedItems.Count > 0)
+            string text = string.Empty;
+            if (Access(out text, out TestModel selectedTest))
             {
-                var test = (TestModel)lv_testList.SelectedItems[0].Tag;
-                var questionList = questionService.GetAll().Where(x => x.TestID == test.TestID).ToList();
+                var questionList = questionService.GetAll().Where(x => x.TestID == selectedTest.TestID).ToList();
 
                 foreach (var question in questionList)
                 {
@@ -175,13 +204,13 @@ namespace QuizApp.UI.Forms
 
                     questionService.Delete(question.QuestionID);
                 }
-                testService.Delete(test.TestID);
+                testService.Delete(selectedTest.TestID);
                 MessageBox.Show("The Test was deleted", "Success");
                 DisplayAllTest();
             }
             else
             {
-                MessageBox.Show("Please select a test", "Error");
+                MessageBox.Show(text, "Error");
             }
         }
 
@@ -194,15 +223,15 @@ namespace QuizApp.UI.Forms
         {
             try
             {
-                if (lv_testList.SelectedItems.Count > 0)
+                string text = string.Empty;
+                if (Access(out text, out TestModel selectedTest))
                 {
-                    var test = (TestModel)lv_testList.SelectedItems[0].Tag;
-                    QuestionListForm questionListForm = new QuestionListForm(test.TestID, test.TestName); 
+                    QuestionListForm questionListForm = new QuestionListForm(selectedTest.TestID, selectedTest.TestName); 
                     questionListForm.ShowDialog();
                 }
                 else
                 {
-                    MessageBox.Show("Please select a test", "Error");
+                    MessageBox.Show(text, "Error");
                 }
             }
             catch (Exception ex)

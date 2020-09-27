@@ -40,6 +40,7 @@
           <Property Name="TestID" Type="int" Nullable="false" />
           <Property Name="CorrectAnswer" Type="int" Nullable="false" />
           <Property Name="Passed" Type="datetime" Nullable="false" />
+          <Property Name="QuestionsTotal" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -255,6 +256,7 @@
           <NavigationProperty Name="Test" Relationship="QuizDBModel.FK_Statistics_Tests" FromRole="Statistic" ToRole="Test" />
           <NavigationProperty Name="User" Relationship="QuizDBModel.FK_Statistics_Users" FromRole="Statistic" ToRole="User" />
           <Property Name="Passed" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuestionsTotal" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -399,6 +401,7 @@
           <EntitySetMapping Name="Statistics">
             <EntityTypeMapping TypeName="QuizDBModel.Statistic">
               <MappingFragment StoreEntitySet="Statistics">
+                <ScalarProperty Name="QuestionsTotal" ColumnName="QuestionsTotal" />
                 <ScalarProperty Name="Passed" ColumnName="Passed" />
                 <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
                 <ScalarProperty Name="TestID" ColumnName="TestID" />

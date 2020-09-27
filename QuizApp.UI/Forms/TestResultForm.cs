@@ -37,7 +37,10 @@ namespace QuizApp.UI.Forms
             UserService userService = new UserService();
             lbl_userName.Text = userService.Get(userID).Name;
             StatisticService statisticService = new StatisticService();
-            int correct = statisticService.GetAll().Where(x => x.TestID == testID && x.UserID == userID).ToList().OrderByDescending(x => x.StatisticID).First().CorrectAnswer;
+            int correct = statisticService.GetAll()
+                                          .Where(x => x.TestID == testID && x.UserID == userID)
+                                          .OrderByDescending(x => x.StatisticID)
+                                          .First().CorrectAnswer;
 
             lbl_result.Text += Math.Round((double)(100 * correct) / questionList.Count).ToString() + "%";
 

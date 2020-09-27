@@ -19,6 +19,7 @@ namespace QuizApp.Data.App_Data
         public int TestID { get; set; }
         public int CorrectAnswer { get; set; }
         public System.DateTime Passed { get; set; }
+        public int QuestionsTotal { get; set; }
     
         public virtual Test Test { get; set; }
         public virtual User User { get; set; }

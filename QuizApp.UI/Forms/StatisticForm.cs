@@ -1,5 +1,6 @@
 ﻿using QuizApp.Logic.Models;
 using QuizApp.Logic.Services.Implementations;
+using QuizApp.Logic.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,37 +15,43 @@ namespace QuizApp.UI.Forms
 {
     public partial class StatisticForm : Form
     {
+        private readonly IUserService userService;
+        private readonly IStatisticService statisticService;
+        private readonly ITestService testService;
+        private readonly IQuestionService questionService;
+        private readonly ICategoryService categoryService;
         public StatisticForm()
         {
             InitializeComponent();
+            userService = new UserService();
+            statisticService = new StatisticService();
+            testService = new TestService();
+            questionService = new QuestionService();
+            categoryService = new CategoryService();
         }
 
-        private void LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void lbl_userStatistic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             lv_statistic.Items.Clear();
-            StatisticService statisticService = new StatisticService();
+            if (lv_statistic.Columns.Count < 4)
+            {
+                lv_statistic.Columns.Add("Passed", 150, HorizontalAlignment.Left);
+                lv_statistic.Columns[2].Text = "Percent";
+                lv_statistic.Columns[2].Width = 60;
+            }
+
             List<StatisticModel> statisticList = statisticService.GetAll().ToList();
-            string text = (sender as LinkLabel).Text;
 
             foreach (var statistic in statisticList)
             {
-                TestService testService = new TestService();
-                string name, testName;
-                if (text == "User statistics")
-                {
-                    UserService userService = new UserService();
-                    testName = testService.Get(statistic.TestID).TestName;
-                    name = userService.Get(statistic.UserID).Name;
-                }
-                else
-                {
-                    CategoryService categoryService = new CategoryService();
-                    TestModel test = testService.Get(statistic.TestID);
-                    name = categoryService.Get(test.CategoryID).CategoryName;
-                    testName = test.TestName;
-                }
+                string testName = testService.Get(statistic.TestID).TestName;
+                string name = userService.Get(statistic.UserID).Name;
 
-                QuestionService questionService = new QuestionService();
                 int count = questionService.GetAll().Where(x => x.TestID == statistic.TestID).ToList().Count;
                 string percent = Math.Round((double)(100 * statistic.CorrectAnswer) / count).ToString();
 
@@ -55,9 +62,40 @@ namespace QuizApp.UI.Forms
             }
         }
 
-        private void btn_exit_Click(object sender, EventArgs e)
+        private void lbl_categoryStatistic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            lv_statistic.Items.Clear();
+            lv_statistic.Columns[0].Text = "Category Name";
+            lv_statistic.Columns[2].Text = "Average Percent";
+            lv_statistic.Columns[2].Width = 120;
+            
+            if (lv_statistic.Columns.Count == 4)
+            {
+                lv_statistic.Columns.Remove(lv_statistic.Columns[3]);
+            }
+            
+            var allStatistic = statisticService.GetAll();
+            List<StatisticModel> statisticList = allStatistic.GroupBy(x => x.TestID).Select(x => x.First()).ToList();
+
+            foreach (var statistic in statisticList)
+            {
+                TestModel test = testService.Get(statistic.TestID);
+                string name = categoryService.Get(test.CategoryID).CategoryName;
+
+                List<StatisticModel> list = allStatistic.Where(x => x.TestID == statistic.TestID).ToList();
+
+                int percents = 0;
+                foreach (var item in list)
+                {
+                    percents += (int)Math.Round((double)item.CorrectAnswer * 100 / item.QuestionsTotal);
+                }
+
+                int averagePercent = (int)Math.Round((double)percents / list.Count);
+                string[] row = new string[] { name, test.TestName, averagePercent.ToString() + "%" };
+                ListViewItem listView = new ListViewItem(row);
+                listView.Tag = statistic;
+                lv_statistic.Items.Add(listView);
+            }
         }
     }
 }
