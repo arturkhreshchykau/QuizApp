@@ -267,7 +267,7 @@ namespace QuizApp.UI.Forms
             }
             else
             {
-                if (int.TryParse(txt_timer.Text, out int timer))
+                if (int.TryParse(txt_timer.Text, out int timer) && timer > 0)
                 {
                     testModel.Timer = timer;
                 }
@@ -296,6 +296,11 @@ namespace QuizApp.UI.Forms
             {
                 categoryID = Convert.ToInt32(cbo_category.SelectedValue);
             }
+        }
+
+        private void txt_timer_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
