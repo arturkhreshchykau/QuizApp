@@ -297,10 +297,5 @@ namespace QuizApp.UI.Forms
                 categoryID = Convert.ToInt32(cbo_category.SelectedValue);
             }
         }
-
-        private void txt_timer_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

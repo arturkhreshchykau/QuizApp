@@ -170,7 +170,6 @@
             this.txt_timer.Name = "txt_timer";
             this.txt_timer.Size = new System.Drawing.Size(40, 20);
             this.txt_timer.TabIndex = 12;
-            this.txt_timer.TextChanged += new System.EventHandler(this.txt_timer_TextChanged);
             // 
             // label7
             // 
