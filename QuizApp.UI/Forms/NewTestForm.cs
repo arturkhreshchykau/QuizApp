@@ -267,7 +267,7 @@ namespace QuizApp.UI.Forms
             }
             else
             {
-                if (int.TryParse(txt_timer.Text, out int timer))
+                if (int.TryParse(txt_timer.Text, out int timer) && timer > 0)
                 {
                     testModel.Timer = timer;
                 }
